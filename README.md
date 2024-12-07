@@ -13,8 +13,7 @@
 
 # System Architectural Diagram
 
-![Untitled Diagram (1) drawio](https://github.com/user-attachments/assets/4104d343-2f5d-4bd5-aeeb-5f3d695ed3ea)
-
+![Untitled Diagram (1) drawio (1)](https://github.com/user-attachments/assets/50d157ca-88c7-4313-bf98-468a38e12083)
 
 # Dependencies
 
