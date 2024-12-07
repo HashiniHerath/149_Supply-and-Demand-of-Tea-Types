@@ -18,7 +18,7 @@ app.add_middleware(
 
 
 
-# Tea Types
+
 # Load Models
 types_model = joblib.load('tea_type_demand_rf.joblib')
 
