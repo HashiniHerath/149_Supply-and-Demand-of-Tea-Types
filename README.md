@@ -15,3 +15,17 @@
 
 ![Architechtural diagram drawio](https://github.com/user-attachments/assets/138e3096-fb62-4fd2-8c04-f8796f1d78be)
 
+# Dependencies
+
+#### FastAPI: Used to build the RESTful APIs for tasks like sales prediction, demand forecasting, and fetching trends.
+#### Uvicorn: ASGI server used to run the FastAPI application.
+#### Python-Multipart: Handles file uploads in FastAPI, essential for features like importing data.
+#### Tweepy: Integrates with the Twitter API to fetch and analyze Twitter posts.
+#### Matplotlib: Visualization library; used for data plotting, if applicable.
+#### NumPy: Fundamental numerical operations; aids in processing and manipulating arrays for machine learning or data analysis.
+#### Google Cloud Firestore & Firebase-Admin: Manage Firebase database operations and authentication for the application.
+#### UUID: Generates unique identifiers, possibly for database entities or API keys.
+#### Pandas: Data manipulation and analysis; critical for preprocessing data for predictions or trend analysis.
+#### Joblib: Saves and loads machine learning models, such as Random Forest models for sales and demand predictions.
+#### Scikit-Learn: Core library for implementing machine learning models, used extensively for predictions.
+#### Pytrends: Google Trends API wrapper; fetches and processes trend data for analysis.
