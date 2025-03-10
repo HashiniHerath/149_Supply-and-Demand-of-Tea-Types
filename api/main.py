@@ -1,9 +1,21 @@
 from fastapi import FastAPI, HTTPException
-import joblib
+from tweepy import OAuth1UserHandler, API
+from dotenv import load_dotenv
 from pydantic import BaseModel
+import os
+import joblib
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+from pytrends.request import TrendReq
+from pytrends.exceptions import TooManyRequestsError
 import traceback
+import time
+from collections import defaultdict
+from datetime import datetime
+import json
+import http.client
+from typing import Dict, List
+import numpy as np
 
 
 app = FastAPI()
