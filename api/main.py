@@ -84,9 +84,11 @@ async def predict_local_market_release(tea_type: str, data: PredictionRequestX):
         print(error_message)
         raise HTTPException(status_code=500, detail=f"Error during prediction: {str(e)}")
 
+# Local Demand 
 
-
-
+loaded_model_1 = joblib.load("local_market_demand/lm_random_forest_model.joblib")
+loaded_model_2 = joblib.load("local_market_demand/lm_lgbm_model.joblib")
+loaded_model_3 = joblib.load("local_market_demand/lm_etr_model.joblib")
 
 
 
