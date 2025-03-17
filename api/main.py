@@ -90,6 +90,11 @@ loaded_model_1 = joblib.load("local_market_demand/lm_random_forest_model.joblib"
 loaded_model_2 = joblib.load("local_market_demand/lm_lgbm_model.joblib")
 loaded_model_3 = joblib.load("local_market_demand/lm_etr_model.joblib")
 
-
+# Dictionary to store models
+MULTI_MODELS_DEMAND = {
+    "Random Forest": loaded_model_1,
+    "LightGBM": loaded_model_2,
+    "Extra Trees": loaded_model_3
+}
 
 
