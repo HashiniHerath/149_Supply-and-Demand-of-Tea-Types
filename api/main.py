@@ -32,6 +32,7 @@ class PredictionInput(BaseModel):
     dollar_rate: float
     elevation: str  # Input elevation as a string
     avg_price: float
+    sales_code: int
 
 @app.post("/predict/sales-quantity")
 async def predict_sales_quantity(input_data: PredictionInput):
