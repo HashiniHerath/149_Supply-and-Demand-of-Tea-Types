@@ -91,3 +91,12 @@ async def predict_tea_price(request: PredictionRequest):
         model = rf_model_pf1
     else:
         raise HTTPException(status_code=400, detail="Invalid tea type. Choose 'BP1' or 'PF1'.")
+
+    # Make prediction
+    elevation_encoded = elevation_map.get(request.elevation, elevation_map['Unknown'])
+    predicted_quantity = predict_price(
+        model, request.year, request.dollar_rate, elevation_encoded, request.sales_code
+    )
+
+    return {"tea_type": request.tea_type, "predicted_unit": predicted_quantity}
+
