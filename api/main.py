@@ -25,9 +25,9 @@ models = {
     "russia": joblib.load("export_demand/export_RUSS_rf.joblib"),
     "uk": joblib.load("export_demand/export_UK_rf.joblib"),
     "usa": joblib.load("export_demand/export_USA_rf.joblib"),
-}
+} 
 
-    
+
 # Endpoint for Export Demand by country
 class DemandPredictionInput(BaseModel):
     year: int
@@ -39,15 +39,7 @@ class DemandPredictionInput(BaseModel):
 @app.post("/predict/demand")
 async def predict_demand(input_data: DemandPredictionInput):
     print(input_data.CH_CPI)
-    """
-    Predict demand based on input parameters and the specified country.
-
-    Parameters:
-        input_data (DemandPredictionInput): The input parameters for prediction.
-
-    Returns:
-        dict: Predicted demand and model details.
-    """
+    
     try:
         # Ensure the country has a corresponding model
         country = input_data.country.lower()
@@ -79,9 +71,14 @@ async def predict_demand(input_data: DemandPredictionInput):
         # Predict demand
         prediction = selected_model.predict(model_input)
 
+        yr_weights_balance = input_data.year - 2020
+        if(yr_weights_balance > 0):
+            prediction[0] = prediction[0] + ((prediction[0]*yr_weights_balance)/100)
+
         return {
             "country": country.capitalize(),
             "predicted_demand": prediction[0],
+            "month": input_data.month
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error during prediction: {str(e)}") 
