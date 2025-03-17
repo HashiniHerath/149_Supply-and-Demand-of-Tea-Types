@@ -20,7 +20,10 @@ app.add_middleware(
 
 # Load Models
 sales_model = joblib.load('model_sales_quantity.joblib')
-  
+
+types_model = joblib.load('tea_type_demand_rf.joblib')
+
+
 elevation_map = {'High grown': 0, 'Low grown': 1, 'Mid grown': 2, 'Unknown': 3}
 
 # Pydantic model for Sales Predict
