@@ -69,3 +69,25 @@ class PredictionRequest(BaseModel):
     # avg_price: float
     sales_code: int
     tea_type: str  # Either 'BP1' or 'PF1'
+
+# Define prediction function
+def predict_price(model, year, dollar_rate, elevation, sales_code):
+    input_data = np.array([[year, sales_code, dollar_rate, elevation]])
+    prediction = model.predict(input_data)
+    yr_weights_balance = year - 2020
+    final_prediction = prediction[0]
+
+    if(yr_weights_balance > 0):
+            final_prediction = final_prediction + (0.1*(final_prediction*yr_weights_balance)/100)
+    return final_prediction
+
+
+@app.post("/predict-sales-unit-price")
+async def predict_tea_price(request: PredictionRequest):
+    # Select the correct model based on tea type
+    if request.tea_type.upper() == "BP1":
+        model = rf_model_bp1
+    elif request.tea_type.upper() == "PF1":
+        model = rf_model_pf1
+    else:
+        raise HTTPException(status_code=400, detail="Invalid tea type. Choose 'BP1' or 'PF1'.")
