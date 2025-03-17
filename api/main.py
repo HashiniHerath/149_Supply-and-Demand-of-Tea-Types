@@ -44,6 +44,7 @@ async def predict_sales_quantity(input_data: PredictionInput):
         model_input = [
             [
                 input_data.year,
+                input_data.sales_code,
                 input_data.dollar_rate,
                 elevation_encoded,
                 input_data.avg_price
