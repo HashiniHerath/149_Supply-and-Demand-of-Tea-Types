@@ -46,8 +46,8 @@ class PredictionRequest(BaseModel):
     elevation: str
     inflation_rate: float
 
-@app.post("/predict/local-market-release")
-async def predict_local_market_release(data: PredictionRequest):
+@app.get("/predict/local-market-release/{tea_type}")
+async def predict_local_market_release(tea_type: str, data: PredictionRequestX):
     """
     Predicts the Local market Release Quantity (Kg) using the trained Random Forest model.
     """
