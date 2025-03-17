@@ -17,11 +17,16 @@ app.add_middleware(
 
 
 # Load Models
-
 models = {
-    "china": joblib.load("export_china_rf.joblib"),
-    "germany": joblib.load("export_Germany_rf.joblib"),
+    "china": joblib.load("export_demand/export_china_rf.joblib"),
+    "germany": joblib.load("export_demand/export_Germany_rf.joblib"),
+    "iran": joblib.load("export_demand/export_Iran_rf.joblib"),
+    "japan": joblib.load("export_demand/export_JPA_rf.joblib"),
+    "russia": joblib.load("export_demand/export_RUSS_rf.joblib"),
+    "uk": joblib.load("export_demand/export_UK_rf.joblib"),
+    "usa": joblib.load("export_demand/export_USA_rf.joblib"),
 }
+
     
 # Endpoint for Export Demand by country
 class DemandPredictionInput(BaseModel):
