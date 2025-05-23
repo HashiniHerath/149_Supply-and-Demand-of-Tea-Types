@@ -75,3 +75,17 @@ const TeaProductionChart = () => {
         });
   
       const data = await Promise.all(elevationRequests);
+
+      // Formatting data for the chart
+      const formattedData = {};
+      data.forEach(({ elevation, monthlyData }) => {
+        formattedData[elevation] = monthlyData;
+      });
+  
+      setChartData(formattedData);
+    } catch (error) {
+      console.error('Error fetching tea production data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
