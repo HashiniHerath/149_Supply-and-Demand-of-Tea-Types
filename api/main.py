@@ -94,4 +94,39 @@ MULTI_MODELS_DEMAND = {
     "Extra Trees": loaded_model_3
 }
 
+def predict_tea_whole_production_weighted(year, month, processing_method, elevation, 
+                                    inflation_rate, temp_avg, rain, humidity_day, humidity_night):
+    try:
+        # Encode labels
+        processing_method_encoded, elevation_encoded = encode_labels(processing_method, elevation)
+        
+        if processing_method_encoded == -1 or elevation_encoded == -1:
+            return {"error": "Invalid processing method or elevation label."}
+        
+        # Create input data as DataFrame
+        input_data = pd.DataFrame([[year, month, processing_method_encoded, elevation_encoded, 
+                                    inflation_rate, temp_avg, rain, humidity_day, humidity_night]],
+                                  columns=["year", "month", "Processing Method", "Elevation",
+                                           "inflation rate", "Temp AVG", "Rain", "Humidity Day", "Humidity Night"])
+
+        # Get predictions from all models
+        predictions = np.array([model.predict(input_data)[0] for model in MULTI_MODELS_WHOLE_PROD.values()])
+        
+        # Define model weights (assign higher weights to better models)
+        weights = np.array([0.4, 0.3, 0.3])  # Example: Higher weight to Random Forest
+        
+        # Compute weighted prediction
+        yr_weights_balance = year - 2020
+
+        final_prediction = np.sum(predictions * weights)
+        if(yr_weights_balance > 0):
+            final_prediction = final_prediction + ((final_prediction*yr_weights_balance)/100)
+        
+
+        return {"predicted_tea_whole_production": final_prediction}
+    
+    except Exception as e:
+        return {"error": str(e)}
+
+
 
