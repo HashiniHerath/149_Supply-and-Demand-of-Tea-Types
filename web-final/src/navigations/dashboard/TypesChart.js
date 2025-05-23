@@ -94,3 +94,22 @@ const TypesChart = () => {
       borderWidth: 1,
     })),
   };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "#333",
+        },
+      },
+      title: {
+        display: true,
+        text: `Predicted Local Market Release Quantity`,
+        color: "#333",
+        font: {
+          size: 18,
+        },
+      },
+    },
