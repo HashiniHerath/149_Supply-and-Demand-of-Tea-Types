@@ -24,3 +24,19 @@ const TeaWholeProductionChart = () => {
   const [loading, setLoading] = useState(false);
   const [selectedElevations, setSelectedElevations] = useState({ Low: false, Medium: false, High: true });
   const [weatherData, setWeatherData] = useState([]);
+
+  useEffect(() => {
+    const fetchWeatherForCities = async () => {
+      try {
+        const responses = await Promise.all(
+          Object.values(cities).map((city) =>
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3ca1b71cf73d793ea485f6d257cedd49&units=metric`)
+          )
+        );
+        setWeatherData(responses.map((res) => res.data));
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    };
+    fetchWeatherForCities();
+  }, []);
