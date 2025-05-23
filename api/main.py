@@ -23,3 +23,6 @@ app.add_middleware(
 sales_model = joblib.load('sales/model_sales_quantity_new.joblib')
 
 types_model = joblib.load('tea_type_demand_rf.joblib')
+
+
+elevation_map = {'High grown': 0, 'Low grown': 1, 'Mid grown': 2, 'Unknown': 3}
