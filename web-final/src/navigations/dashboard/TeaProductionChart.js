@@ -180,3 +180,7 @@ const TeaProductionChart = () => {
       // Add horizontal line
       doc.setDrawColor(150);
       doc.line(10, 50, 280, 50);
+
+      // Add Report Title
+      doc.setFontSize(16);
+      doc.text("Tea Local Production Release Report", 10, 60);
