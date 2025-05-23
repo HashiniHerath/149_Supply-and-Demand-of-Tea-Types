@@ -1,0 +1,65 @@
+/* Container */
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  /* Title */
+  .blog-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Grid Layout */
+  .blog-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
+    gap: 20px;
+    justify-items: center; /* Center grid items horizontally */
+    justify-content: center; /* Center grid items in the grid container */
+  }
+  
+  /* Blog Card */
+  .blog-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .blog-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Image */
+  .blog-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Overlay */
+  .blog-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .blog-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
