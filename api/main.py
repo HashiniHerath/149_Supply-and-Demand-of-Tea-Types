@@ -148,6 +148,9 @@ def predict_lm_ensemble(year, month, processing_method, elevation, production_to
         
         if processing_method_encoded == -1 or elevation_encoded == -1:
             return {"error": "Invalid processing method or elevation label."}
+        
+        # Get predictions from all models
+        predictions = np.array([model.predict(input_data)[0] for model in MULTI_MODELS_DEMAND.values()])
 
 
 
