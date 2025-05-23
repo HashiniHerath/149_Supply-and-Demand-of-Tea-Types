@@ -113,3 +113,14 @@ const TypesChart = () => {
         },
       },
     },
+    scales: {
+      x: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Tea Type",
+          color: "#333",
+        },
+      },
