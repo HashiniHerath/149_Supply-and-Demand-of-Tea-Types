@@ -33,3 +33,12 @@ const TypesChart = () => {
       const quantityLevels = Object.keys(selectedQuantities).filter(
         (level) => selectedQuantities[level]
       );
+
+      try {
+        const response = await axios.post(Env.BACKEND+"/predict/local-market-release", {
+          processing_method: selectedType,
+          elevation: "HIGH", // Example of static value, you may want to adjust it
+          year: 2024,
+          month: 6,
+          inflation_rate: 2.5, // Example inflation rate
+        });
