@@ -273,3 +273,18 @@ const TeaProductionChart = () => {
             ))}
         </div>
       </div>
+      <div style={{ width: '75%', paddingLeft: '40px' }}>
+        
+        <div className="chartContainer">
+            {loading ? (
+                <img 
+                    src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`} 
+                    className="blog-image" 
+                    style={{ 
+                    width: "250px", 
+                    height: "250px", 
+                    objectFit: "contain", 
+                    display: "block", 
+                    margin: "auto" 
+                    }} 
+                />
