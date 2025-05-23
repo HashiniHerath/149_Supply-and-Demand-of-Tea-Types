@@ -269,3 +269,98 @@ const SalesChart = () => {
                 {errors.avgPrice && <span style={{ color: 'red', marginLeft: '10px' }}>{errors.avgPrice}</span>}
               </div>
             </div>
+
+                        <button 
+              onClick={generatePDF} 
+              style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                backgroundColor: 'green', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'lightgreen';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'green';
+                e.target.style.color = 'white';
+              }}
+            >
+              Generate PDF Report
+            </button>
+
+            <button onClick={() => navigate('/sales-all')} style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                marginLeft: '20px',
+                backgroundColor: '#8e44ad', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#9b59b6';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#8e44ad';
+                e.target.style.color = 'white';
+              }}>
+              In Pie Chart
+            </button>
+          </div>
+          <div style={{ width: "50%", marginTop: "20px", display: "flex", alignItems: "center" }}>
+            <h3>Sales Code: {salesCode}</h3>
+            <select
+              value={salesCode}
+              onChange={(e) => {
+                handleSalesCodeChange(Number(e.target.value));
+                fetchSalesData();
+              }}
+              style={{ marginLeft: "20px", padding: "5px", borderRadius: "5px", fontSize: "16px" }}
+            >
+              {[...Array(50)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  {index + 1}
+                </option>
+              ))}
+            </select>
+            <button 
+              style={{ marginLeft: "20px", borderRadius: "50%", padding: "5px" }} 
+              onClick={() => {
+                if (salesCode > 1) {
+                  handleSalesCodeChange(salesCode - 1);
+                  fetchSalesData();
+                }
+              }}
+            >
+              <FaMinus size={20} />
+            </button>
+            <button 
+              style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px" }} 
+              onClick={() => {
+                if (salesCode < 50) {
+                  handleSalesCodeChange(salesCode + 1);
+                  fetchSalesData();
+                }
+              }}
+            >
+              <FaPlus size={20} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SalesChart;
