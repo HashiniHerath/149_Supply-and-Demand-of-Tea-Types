@@ -35,9 +35,6 @@ class PredictionInput(BaseModel):
     avg_price: float
     sales_code: int
 
-    @app.post("/predict/sales-quantity")
-    async def predict_sales_quantity(input_data: PredictionInput):
-        print(input_data)
 
     @app.post("/predict/demand")
     async def predict_demand(input_data: DemandPredictionInput):
