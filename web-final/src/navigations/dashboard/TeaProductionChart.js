@@ -69,3 +69,9 @@ const TeaProductionChart = () => {
               }))
             };
           });
+
+          const monthlyData = await Promise.all(monthRequests);
+          return { elevation, monthlyData };
+        });
+  
+      const data = await Promise.all(elevationRequests);
