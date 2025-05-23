@@ -226,3 +226,23 @@ const TeaProductionChart = () => {
       }
     };
   };
+
+  const changeYear = (offset) => {
+    setYear((prevYear) => prevYear + offset);
+  };
+  
+
+  useEffect(() => {
+    const fetchWeatherForCities = async () => {
+      try {
+        const responses = await Promise.all(
+          cities.map(city =>
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3ca1b71cf73d793ea485f6d257cedd49&units=metric`)
+          )
+        );
+        console.log(responses)
+        setWeatherData(responses.map(res => res.data));
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
