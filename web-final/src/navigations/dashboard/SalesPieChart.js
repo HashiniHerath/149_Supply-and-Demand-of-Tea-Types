@@ -281,3 +281,32 @@ const SalesPieChart = () => {
       }
     };
   };
+
+    useEffect(() => {
+    fetchSalesData();
+    fetchBarChartData();
+  }, [salesCode, selectedElevations, teaType, dollarRate, avgPrice]);
+
+  const chartData = {
+    labels: Object.keys(salesData),
+    datasets: [
+      {
+        data: Object.values(salesData),
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF4C72", "#2D91C2", "#E6B800"],
+      },
+    ],
+  };
+
+  const barChartData2 = {
+    labels: Object.keys(barChartData),
+    datasets: [
+      {
+        label: 'Predicted Unit Price (Rs.)',
+        data: Object.values(barChartData),
+        backgroundColor: '#36A2EB',
+        borderColor: '#2D91C2',
+        borderWidth: 1,
+      },
+    ],
+  };
