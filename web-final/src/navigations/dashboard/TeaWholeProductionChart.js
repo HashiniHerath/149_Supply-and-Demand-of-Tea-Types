@@ -8,3 +8,19 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import Env from "../../data/Env";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const TeaWholeProductionChart = () => {
+  const navigate = useNavigate();
+  const defaultYear = new Date().getFullYear();
+  const months = Array.from({ length: 12 }, (_, i) => i + 1); // Months 1-12
+  const processingMethods = ["Orthodox", "CTC", "Green"];
+  const elevations = ["Low", "Medium", "High"];
+  const cities = { Low: "Galle", Medium: "Kandy", High: "Badulla" };
+  const [year, setYear] = useState(2022);
+
+  const [chartData, setChartData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [selectedElevations, setSelectedElevations] = useState({ Low: false, Medium: false, High: true });
+  const [weatherData, setWeatherData] = useState([]);
