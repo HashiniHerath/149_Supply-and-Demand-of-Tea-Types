@@ -212,3 +212,4 @@ yr_weights_balance = year - 2020
         if(yr_weights_balance > 0):
             final_prediction = final_prediction + ((final_prediction*yr_weights_balance)/100)
         
+return {"predicted_tea_production": final_prediction}
