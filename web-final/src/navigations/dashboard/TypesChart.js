@@ -137,3 +137,10 @@ const TypesChart = () => {
       },
     },
   };
+  // Tab styles
+  const tabStyles = {
+    container: {
+      display: "flex",
+      justifyContent: "center",
+      margin: "20px 0",
+    },
