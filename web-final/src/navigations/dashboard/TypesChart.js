@@ -58,3 +58,11 @@ const TypesChart = () => {
             return acc;
           }, {}),
         };
+
+         setDemandData(data);
+      } catch (error) {
+        console.error("Error fetching demand data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
