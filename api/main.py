@@ -200,5 +200,10 @@ except Exception as e:
                                     inflation_rate, temp_avg, rain, humidity_day, humidity_night]],
                                   columns=["year", "month", "Processing Method", "Elevation", "production Total (kg)",
                                            "inflation rate", "Temp AVG", "Rain", "Humidity Day", "Humidity Night"])
+# Get predictions from all models
+        predictions = np.array([model.predict(input_data)[0] for model in MULTI_MODELS_DEMAND.values()])
+        
+        # Average predictions
+        final_prediction = np.mean(predictions)
 
 
