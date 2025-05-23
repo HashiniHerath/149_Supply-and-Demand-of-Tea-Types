@@ -144,3 +144,20 @@ const TypesChart = () => {
       justifyContent: "center",
       margin: "20px 0",
     },
+    tab: {
+      padding: "10px 20px",
+      margin: "0 5px",
+      cursor: "pointer",
+      borderRadius: "5px",
+      backgroundColor: "#f0f0f0",
+      border: "1px solid #ccc",
+      fontWeight: "bold",
+      color: "#333",
+    },
+    activeTab: {
+      backgroundColor: "#007bff",
+      color: "#fff",
+      border: "1px solid #0056b3",
+    },
+  };
+
