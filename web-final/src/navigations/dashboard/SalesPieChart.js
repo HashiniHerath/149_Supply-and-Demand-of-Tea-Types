@@ -550,3 +550,51 @@ const SalesPieChart = () => {
           </button>
         </div>
       </div>
+
+            <div style={{ width: "50%", height: "400px", display:'flex', justifyContent: 'center' }}>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className='chartContainer'>
+            <Pie data={chartData} options={chartOptions} style={{minHeight: '250px'}}/>
+            <br></br>
+            <center>
+              <h4>Total Quantity: {totalSalesQuantity} kg</h4>
+              <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                <p><strong>High Grown:</strong> {salesData["High grown"] || 0} kg</p>
+                <p><strong>Mid Grown:</strong> {salesData["Mid grown"] || 0} kg</p>
+                <p><strong>Low Grown:</strong> {salesData["Low grown"] || 0} kg</p>
+              </div>
+              <button 
+                onClick={generatePDF} 
+                style={{ 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  marginTop: '20px', 
+                  backgroundColor: 'green', 
+                  color: 'white', 
+                  border: 'none', 
+                  cursor: 'pointer', 
+                  transition: '0.3s',
+                  borderRadius: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = 'lightgreen';
+                  e.target.style.color = 'black';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'green';
+                  e.target.style.color = 'white';
+                }}
+              >
+                Generate PDF Report
+              </button>
+            </center>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default SalesPieChart;
