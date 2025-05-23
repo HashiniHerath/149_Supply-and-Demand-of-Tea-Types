@@ -180,3 +180,49 @@ return (
           </div>
         ))}
       </div>
+      <div style={{ textAlign: "center" }}>
+        <img
+          src={`/${selectedType.replace(" ", "").toLowerCase()}.jpg`} // Assuming image filenames are ctc.jpg, green.jpg, orthodox.jpg
+          alt={selectedType}
+          style={{ width: "150px", height: "150px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0,0,0,0.2)", border: "2px solid #ccc", marginBottom: "20px" }}
+        />
+      </div>
+
+      <div className="chartContainer" style={{ marginBottom: "20px" }}>
+        {loading ? (
+          <img 
+            src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`} 
+            className="blog-image" 
+            style={{ 
+              width: "250px", 
+              height: "250px", 
+              objectFit: "contain", 
+              display: "block", 
+              margin: "auto" 
+            }} 
+          />
+        ) : (
+          <Bar data={chartData} options={options} />
+        )}
+      </div>
+
+      <div className="controls" style={{ textAlign: "center" }}>
+        <h3>Select Quantity Levels:</h3>
+        {["HIGH", "LOW", "MEDIUM"].map((quantity) => (
+          <label key={quantity} style={{ marginRight: "15px", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={selectedQuantities[quantity]}
+              onChange={() => handleQuantityChange(quantity)}
+              style={{ marginRight: "5px" }}
+            />
+            {quantity}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default TypesChart;
+
