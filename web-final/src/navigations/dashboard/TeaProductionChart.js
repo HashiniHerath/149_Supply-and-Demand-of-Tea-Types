@@ -195,3 +195,18 @@ const TeaProductionChart = () => {
           // Add Table Title
           doc.setFontSize(14);
           doc.text("Estimated Production Data Table", 10, 200);
+
+          // Prepare table data
+          const tableData = [];
+          Object.keys(chartData).forEach((elevation) => {
+            chartData[elevation].forEach(({ month, data }) => {
+              data.forEach(({ method, estimated_quantity }) => {
+                tableData.push([
+                  elevation,
+                  `${year}-${String(month).padStart(2, "0")}`,
+                  method,
+                  estimated_quantity,
+                ]);
+              });
+            });
+          });
