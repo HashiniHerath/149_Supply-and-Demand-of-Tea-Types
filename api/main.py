@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from collections import defaultdict
 from typing import Dict, List
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
@@ -76,7 +77,7 @@ def predict_price(model, year, dollar_rate, elevation, sales_code):
 
 
     @app.post("/predict-sales-unit-price")
-async def predict_tea_price(request: PredictionRequest):
+    async def predict_tea_price(request: PredictionRequest):
     # Select the correct model based on tea type
     if request.tea_type.upper() == "BP1":
         model = rf_model_bp1
