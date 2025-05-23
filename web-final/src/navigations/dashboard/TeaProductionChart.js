@@ -38,3 +38,24 @@ const TeaProductionChart = () => {
         Medium: weatherData.find(w => w.name === 'Kandy'),
         High: weatherData.find(w => w.name === 'Badulla')
       };
+
+      const elevationRequests = Object.keys(selectedElevations)
+        .filter(elevation => selectedElevations[elevation])
+        .map(async (elevation) => {
+          const weather = weatherMap[elevation] || { main: { temp: 25.0, humidity: 75.0 } }; // Default values if no match
+  
+          const monthRequests = months.map(async (month) => {
+            const methodRequests = processingMethods.map(method =>
+              axios.post(Env.BACKEND+'/predict-tea-production-weighted', {
+                year: year,
+                month,
+                processing_method: method,
+                elevation,
+                production_total: 1500,
+                inflation_rate: 300,
+                temp_avg: weather.main.temp,
+                rain: 200.0,
+                humidity_day: weather.main.humidity,
+                humidity_night: weather.main.humidity + 10 // Example assumption
+              })
+            );
