@@ -310,3 +310,26 @@ const SalesPieChart = () => {
       },
     ],
   };
+
+    const chartOptions = {
+    plugins: {
+      title: {
+        display: true,
+        text: "Sales Quantity Prediction Overview",
+        font: {
+          size: 18,
+        },
+        padding: {
+          top: 10,
+          bottom: 10,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return `${context.label}: ${context.raw} kg (${((context.raw / totalSalesQuantity) * 100).toFixed(1)}%)`;
+          }
+        }
+      }
+    },
+  };
