@@ -191,3 +191,7 @@ const TeaProductionChart = () => {
         html2canvas(chartElement).then((canvas) => {
           const imgData = canvas.toDataURL("image/png");
           doc.addImage(imgData, "PNG", 10, 70, 260, 120); // Adjust size for landscape layout
+
+          // Add Table Title
+          doc.setFontSize(14);
+          doc.text("Estimated Production Data Table", 10, 200);
