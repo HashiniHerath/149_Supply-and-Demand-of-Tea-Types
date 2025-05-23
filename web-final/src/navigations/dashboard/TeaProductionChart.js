@@ -358,3 +358,20 @@ const TeaProductionChart = () => {
                 transition: '0.3s',
                 borderRadius: '10px'
               }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3498db';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#2980b9';
+                e.target.style.color = 'white';
+              }}>
+            Whole Production Chart
+            </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TeaProductionChart;
