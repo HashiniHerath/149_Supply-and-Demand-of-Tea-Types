@@ -369,3 +369,86 @@ const SalesPieChart = () => {
       },
     },
   };
+
+    return (
+    <div className="chart" style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+      <div style={{ width: "50%", marginBottom: "20px" }}>
+        <div style={{ marginBottom: '20px' }}>
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '10px' }}>
+            <div style={{ flex: 1 }}>
+              <label htmlFor="dollarRate" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+                Dollar Rate:
+              </label>
+              <input
+                id="dollarRate"
+                type="number"
+                min="0"
+                step="0.01"
+                value={dollarRate}
+                onChange={handleDollarRateChange}
+                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: errors.dollarRate ? '1px solid red' : '1px solid #ccc' }}
+              />
+              {errors.dollarRate && <p style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.dollarRate}</p>}
+            </div>
+            <div style={{ flex: 1 }}>
+              {/* <label htmlFor="avgPrice" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+                Average Price:
+              </label>
+              <input
+                id="avgPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                value={avgPrice}
+                onChange={handleAvgPriceChange}
+                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: errors.avgPrice ? '1px solid red' : '1px solid #ccc' }}
+              /> */}
+              {errors.avgPrice && <p style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.avgPrice}</p>}
+            </div>
+          </div>
+        </div>
+        <div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className='chartContainerB'>
+              <Bar data={barChartData2} options={barChartOptions} />
+              <div style={{ marginTop: "20px" }}>
+                <h4>Select Elevation Types:</h4>
+                <select
+                  //multiple
+                  value={selectedElevations}
+                  onChange={(e) => setSelectedElevations(Array.from(e.target.selectedOptions, option => option.value))}
+                  style={{ width: "100%", padding: "10px", borderRadius: "5px", fontSize: "16px" }}
+                >
+                  <option value="High grown">High grown</option>
+                  <option value="Low grown">Low grown</option>
+                  <option value="Mid grown">Mid grown</option>
+                </select>
+              </div>
+              <div>
+                <br></br>
+                <h4>Switch Tea Type:</h4>
+                <label>
+                  <input
+                    type="radio"
+                    name="teaType"
+                    value="BP1"
+                    checked={teaType === "BP1"}
+                    onChange={() => setTeaType("BP1")}
+                  />
+                  BP1
+                </label>
+                <label style={{ marginLeft: "20px" }}>
+                  <input
+                    type="radio"
+                    name="teaType"
+                    value="PF1"
+                    checked={teaType === "PF1"}
+                    onChange={() => setTeaType("PF1")}
+                  />
+                  PF1
+                </label>
+              </div>
+            </div>
+          )}
