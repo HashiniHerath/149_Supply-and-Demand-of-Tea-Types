@@ -24,3 +24,12 @@ const TypesChart = () => {
     LOW: true,
     MEDIUM: true,
   });
+
+  // Handle the prediction request
+  useEffect(() => {
+    const fetchDemandData = async () => {
+      setLoading(true);
+      const teaTypes = ["CTC TEA", "GREEN TEA", "ORTHODOX"];
+      const quantityLevels = Object.keys(selectedQuantities).filter(
+        (level) => selectedQuantities[level]
+      );
