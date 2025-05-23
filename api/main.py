@@ -172,4 +172,15 @@ class TeaProductionInput(BaseModel):
     humidity_day: float
     humidity_night: float
 
+    class TeaProductionInputUpdated(BaseModel):
+    year: int
+    month: int
+    processing_method: str
+    elevation: str
+    inflation_rate: float
+    temp_avg: float
+    rain: float
+    humidity_day: float
+    humidity_night: float
+
 
