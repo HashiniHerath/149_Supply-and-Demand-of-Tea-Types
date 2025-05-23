@@ -28,3 +28,58 @@ const SalesChart = () => {
   const handleSalesCodeChange = (code) => {
     setSalesCode(Number(code));
   };
+
+   const validateInputs = () => {
+    const newErrors = {};
+    if (dollarRate <= 0) newErrors.dollarRate = 'Dollar rate must be positive';
+    if (avgPrice <= 0) newErrors.avgPrice = 'Average price must be positive';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const generatePDF = async () => {
+    const doc = new jsPDF("landscape");
+    const logo = new Image();
+    logo.src = `${process.env.PUBLIC_URL}/images/logo.png`;
+  
+    logo.onload = () => {
+      doc.addImage(logo, "PNG", 10, 10, 50, 30);
+      doc.setFontSize(22);
+      doc.setTextColor(40, 40, 40);
+      doc.text("TeaVerse", 70, 20);
+      doc.setFontSize(10);
+      doc.setTextColor(100);
+      doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
+      doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
+      doc.text("Website: www.teaverse.com", 70, 44);
+      doc.setDrawColor(150);
+      doc.line(10, 50, 280, 50);
+      doc.setFontSize(16);
+      doc.text(`Sales Quantity Prediction Report (Sales Code: ${salesCode})`, 10, 60);
+  
+      const chartElement = document.querySelector(".chartContainer");
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          doc.addImage(imgData, "PNG", 10, 70, 260, 120);
+          doc.setFontSize(14);
+          doc.text("Sales Data Table", 10, 200);
+  
+          const tableData = [];
+          Object.keys(salesData).forEach((elevation) => {
+            salesData[elevation].forEach((data) => {
+              tableData.push([elevation, data.year, data.predicted_quantity]);
+            });
+          });
+  
+          doc.autoTable({
+            head: [["Elevation", "Year", "Predicted Quantity (Kg)"]],
+            body: tableData,
+            startY: 210,
+          });
+  
+          doc.save("Sales_Quantity_Prediction_Report.pdf");
+        });
+      }
+    };
+  };
