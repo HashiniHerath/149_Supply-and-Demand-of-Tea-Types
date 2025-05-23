@@ -346,3 +346,15 @@ const TeaProductionChart = () => {
             </button>
             <button onClick={() => {
               navigate('/tea-types-whole')
+              }} style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                marginLeft: '20px',
+                backgroundColor: '#2980b9', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
