@@ -1,0 +1,76 @@
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 15px 20px;
+  
+  position: absolute;
+  right: 0;
+  top: 0;
+  
+}
+
+/* Menu Icon */
+.menu-icon {
+  cursor: pointer;
+  z-index: 1000;
+  color: #333;
+  background-color: white;
+  opacity: 0.7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Initially hidden */
+  width: 20%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9); /* Dark semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.4s ease-in-out;
+  z-index: 999;
+
+}
+
+/* Open Menu */
+.dropdown-menu.open {
+  right: 0; /* Slides in */
+}
+
+.menu-logo img {
+  width: 200px; /* Adjust size */
+  height: auto;
+  margin-bottom: 30px; /* Spacing below logo */
+}
+
+/* Menu Links */
+.menu-links a {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin: 15px 0;
+  transition: color 0.3s;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* position: relative;
+  left: -80px; */
+}
+
+.menu-links a:hover {
+  color: #ffb80e; /* Highlight on hover */
+}
+
+@media (max-width: 1000px) {
+  .dropdown-menu {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
