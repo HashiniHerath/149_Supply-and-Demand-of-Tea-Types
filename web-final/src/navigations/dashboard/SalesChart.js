@@ -1,0 +1,10 @@
+import React, { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { FaMinus, FaPlus, FaRecycle } from 'react-icons/fa';
+import axios from 'axios';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
+import Env from '../../data/Env';
