@@ -305,3 +305,19 @@ const TeaProductionChart = () => {
             </label>
             ))}
         </div> */}
+        <div style={{display:'flex', justifyContent:'space-between'}}> 
+                  <div className="checkboxContainer">
+                    <h3>Select Elevation Types:</h3>
+                    {Object.keys(selectedElevations).map((elevation) => (
+                      <label key={elevation} style={{ marginRight: "15px" }}>
+                        <input type="checkbox" checked={selectedElevations[elevation]} onChange={() => handleCheckboxChange(elevation)} />
+                        {elevation}
+                      </label>
+                    ))}
+                    
+                  </div>
+                  <div>
+                      <button style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px", fontSize: '20px' }} onClick={() => changeYear(-1)}><FaArrowLeft /></button>
+                      <span style={{ margin: "0 20px", fontSize: "1.2rem", fontWeight: "bold" }}>{year}</span>
+                      <button style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px", fontSize: '20px' }} onClick={() => changeYear(1)}><FaArrowRight /></button>
+                  </div>
