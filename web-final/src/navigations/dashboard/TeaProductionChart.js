@@ -89,3 +89,15 @@ const TeaProductionChart = () => {
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+    fetchProductionData();
+  }, [selectedElevations,  year]);
+
+  const handleCheckboxChange = (elevation) => {
+    setSelectedElevations((prev) => ({
+      ...prev,
+      [elevation]: !prev[elevation],
+    }));
+  };
