@@ -53,4 +53,12 @@ class PredictionInput(BaseModel):
 rf_model_bp1 = joblib.load("sales/tea_types/model_sales_ttbp1v2.joblib")  
 rf_model_pf1 = joblib.load("sales/tea_types/model_sales_ttpf1v2.joblib")
 
+
+class PredictionRequest(BaseModel):
+    year: int
+    dollar_rate: float
+    elevation: str
+    # avg_price: float
+    sales_code: int
+    tea_type: str  # Either 'BP1' or 'PF1'
         
