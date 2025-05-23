@@ -153,4 +153,11 @@ def predict_lm_ensemble(year, month, processing_method, elevation, production_to
         predictions = np.array([model.predict(input_data)[0] for model in MULTI_MODELS_DEMAND.values()])
 
 
+# Dictionary to store models
+MULTI_MODELS_WHOLE_PROD = {
+    "Random Forest": loaded_model_wp1,
+    "LightGBM": loaded_model_wp2,
+    "Extra Trees": loaded_model_wp3
+}
+
 
