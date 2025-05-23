@@ -232,6 +232,92 @@ const TeaWholeProductionChart = () => {
               <div>
                 <small>Humidity</small>
                 <p>{weather.main.humidity}%</p>
+                <div style={{ width: "75%", paddingLeft: "40px" }}>
+        <div className="chartContainer">
+          {loading ? (
+            <img
+              src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`}
+              className="blog-image"
+              style={{ width: "250px", height: "250px", objectFit: "contain", display: "block", margin: "auto" }}
+              alt="loading"
+            />
+          ) : (
+            <Bar data={{ labels, datasets }} options={chartOptions} />
+          )}
+        </div>
+
+        <div style={{display:'flex', justifyContent:'space-between'}}> 
+          <div className="checkboxContainer">
+            <h3>Select Elevation Types:</h3>
+            {Object.keys(selectedElevations).map((elevation) => (
+              <label key={elevation} style={{ marginRight: "15px" }}>
+                <input type="checkbox" checked={selectedElevations[elevation]} onChange={() => handleCheckboxChange(elevation)} />
+                {elevation}
+              </label>
+            ))}
+            
+          </div>
+          <div>
+              <button style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px", fontSize: '20px' }} onClick={() => changeYear(-1)}><FaArrowLeft /></button>
+              <span style={{ margin: "0 20px", fontSize: "1.2rem", fontWeight: "bold" }}>{year}</span>
+              <button style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px", fontSize: '20px' }} onClick={() => changeYear(1)}><FaArrowRight /></button>
+          </div>
+        </div>
+        {/* Gen PDF */}
+        <div style={{ marginTop: '20px' }}>
+            <button onClick={generatePDF} style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                backgroundColor: 'green', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'lightgreen';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'green';
+                e.target.style.color = 'white';
+              }}>
+            Generate PDF Report
+            </button>
+            <button onClick={() => {
+              navigate('/tea-types')
+            }} style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                marginLeft: '20px',
+                backgroundColor: '#8e44ad', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#9b59b6';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#8e44ad';
+                e.target.style.color = 'white';
+              }}>
+            Local Market Release
+            </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TeaWholeProductionChart;
+
               </div>
             </div>
           ))}
