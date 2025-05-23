@@ -66,3 +66,11 @@ const TypesChart = () => {
         setLoading(false);
       }
     };
+
+    fetchDemandData();
+  }, [selectedType, selectedQuantities]);
+
+  // Handle type change (CTC TEA, GREEN TEA, ORTHODOX)
+  const handleTypeChange = (type) => {
+    setSelectedType(type);
+  };
