@@ -246,3 +246,30 @@ const TeaProductionChart = () => {
         console.error('Error fetching weather data:', error);
       }
     };
+
+    fetchWeatherForCities();
+  }, []);
+
+  return (
+    <div className="chart" style={{ display: 'flex', flexDirection: 'row', width: '100%', }}>
+      <div style={{ width: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+        {/* Weather Update */}
+        <img src={`${process.env.PUBLIC_URL}/images/tea-grown.png`} alt="Weather" style={{ width: '100%', height: 'auto' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+            {weatherData.map((weather, index) => (
+            <div key={index} className="weather-token" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '5px', backgroundColor: '#6dedab', borderRadius: '10px' }}>
+                <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`} height={45} alt="weather-icon" />
+                <span style={{ fontWeight: 'bold' }}>{weather.name}</span>
+                <div>
+                    <small>Temperature</small>
+                    <p>{weather.main.temp}°C</p>
+                </div>
+                <div>
+                    <small>Humidity</small>
+                    <p>{weather.main.humidity}%</p>
+                </div>
+                
+            </div>
+            ))}
+        </div>
+      </div>
