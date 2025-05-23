@@ -120,3 +120,20 @@ const TeaProductionChart = () => {
       borderWidth: 1,
     }))
   );
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      title: {
+        display: true,
+        text: 'Estimated Local Tea Demand by Elevation & Processing Method',
+      },
+      datalabels: {  // You'll need to install chartjs-plugin-datalabels
+        display: true,
+        color: '#000',
+        anchor: 'end',
+        align: 'top',
+        formatter: (value) => value !== 0 ? value : ''
+      }
+    },
