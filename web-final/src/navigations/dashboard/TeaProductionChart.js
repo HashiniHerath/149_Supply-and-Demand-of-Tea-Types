@@ -160,3 +160,7 @@ const TeaProductionChart = () => {
   
     const logo = new Image();
     logo.src = `${process.env.PUBLIC_URL}/images/logo.png`;
+
+    logo.onload = () => {
+      // Add TeaVerse logo
+      doc.addImage(logo, "PNG", 10, 10, 50, 30);
