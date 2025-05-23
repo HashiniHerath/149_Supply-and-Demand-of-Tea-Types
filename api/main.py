@@ -138,6 +138,16 @@ def predict_tea_whole_production_weighted(year, month, processing_method, elevat
     
     except Exception as e:
         return {"error": str(e)}
+    
+    # Prediction function
+def predict_lm_ensemble(year, month, processing_method, elevation, production_total, 
+                                    inflation_rate, temp_avg, rain, humidity_day, humidity_night):
+    try:
+        # Encode labels
+        processing_method_encoded, elevation_encoded = encode_labels(processing_method, elevation)
+        
+        if processing_method_encoded == -1 or elevation_encoded == -1:
+            return {"error": "Invalid processing method or elevation label."}
 
 
 
