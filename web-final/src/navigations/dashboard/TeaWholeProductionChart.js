@@ -66,3 +66,14 @@ const TeaWholeProductionChart = () => {
                 humidity_day: weather.main.humidity,
                 humidity_night: weather.main.humidity + 10, // Example assumption
               })
+              );
+
+            const responses = await Promise.all(methodRequests);
+            return {
+              month,
+              data: responses.map((res, index) => ({
+                method: processingMethods[index],
+                estimated_quantity: res.data.predicted_tea_whole_production, // Updated key
+              })),
+            };
+          });
