@@ -26,3 +26,15 @@ const TeaProductionChart = () => {
     Medium: false,
     High: true
   });
+
+  const [weatherData, setWeatherData] = useState([]);
+  const cities = ['Kandy', 'Nuwara Eliya', 'Badulla', 'Galle'];
+
+  const fetchProductionData = async () => {
+    setLoading(true);
+    try {
+      const weatherMap = {
+        Low: weatherData.find(w => w.name === 'Galle'),
+        Medium: weatherData.find(w => w.name === 'Kandy'),
+        High: weatherData.find(w => w.name === 'Badulla')
+      };
