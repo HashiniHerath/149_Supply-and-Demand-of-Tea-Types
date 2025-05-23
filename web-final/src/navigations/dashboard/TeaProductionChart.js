@@ -176,3 +176,7 @@ const TeaProductionChart = () => {
       doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
       doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
       doc.text("Website: www.teaverse.com", 70, 44);
+
+      // Add horizontal line
+      doc.setDrawColor(150);
+      doc.line(10, 50, 280, 50);
