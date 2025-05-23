@@ -210,3 +210,12 @@ const TeaProductionChart = () => {
               });
             });
           });
+
+          // Add Table with autoTable
+          doc.autoTable({
+            head: [
+              ["Elevation", "Year-Month", "Processing Method", "Estimated Quantity (Kg)"],
+            ],
+            body: tableData,
+            startY: 210, // Ensure proper spacing after the chart
+          });
