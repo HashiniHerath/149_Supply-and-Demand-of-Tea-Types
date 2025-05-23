@@ -191,5 +191,9 @@ def encode_labels(processing_method, elevation):
     return (processing_method_mapping.get(processing_method, -1), 
             elevation_mapping.get(elevation, -1))
 
+except Exception as e:
+        error_message = traceback.format_exc()
+        print(error_message)
+        raise HTTPException(status_code=500, detail=f"Error during prediction: {str(e)}")
 
 
