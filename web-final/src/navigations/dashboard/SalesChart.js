@@ -83,3 +83,71 @@ const SalesChart = () => {
       }
     };
   };
+
+    const fetchSalesData = async () => {
+    if (!validateInputs()) return;
+    
+    setLoading(true);
+    const upcomingYears = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() + i);
+  
+    try {
+      const elevationRequests = Object.keys(selectedElevations)
+        .filter((elevation) => selectedElevations[elevation])
+        .map(async (elevation) => {
+          const requests = upcomingYears.map((year, index) => {
+            const adjustedDollarRate = dollarRate * Math.pow(0.9992, index);
+            const adjustedAvgPrice = avgPrice * Math.pow(1.029, index);
+  
+            return axios.post(Env.BACKEND+'/predict/sales-quantity', {
+              year,
+              dollar_rate: adjustedDollarRate,
+              elevation,
+              avg_price: adjustedAvgPrice,
+              sales_code: salesCode,
+            });
+          });
+  
+          const responses = await Promise.all(requests);
+          const salesQuantities = responses.map((res, index) => ({
+            year: upcomingYears[index],
+            predicted_quantity: res.data.predicted_quantity,
+          }));
+  
+          return { elevation, salesQuantities };
+        });
+  
+      const data = await Promise.all(elevationRequests);
+      const formattedData = {};
+      data.forEach(({ elevation, salesQuantities }) => {
+        formattedData[elevation] = salesQuantities;
+      });
+  
+      setSalesData(formattedData);
+    } catch (error) {
+      console.error('Error fetching sales data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSalesData();
+  }, [selectedElevations, salesCode, dollarRate, avgPrice]);
+
+  const handleCheckboxChange = (elevation) => {
+    setSelectedElevations((prev) => ({
+      ...prev,
+      [elevation]: !prev[elevation],
+    }));
+  };
+
+  const chartData = {
+    labels: Object.values(salesData).length > 0 ? Object.values(salesData)[0].map((data) => data.year) : [],
+    datasets: Object.keys(salesData).map((elevation, index) => ({
+      label: `${elevation} Sales Quantity (Kg)`,
+      data: salesData[elevation]?.map((data) => data.predicted_quantity) || [],
+      backgroundColor: `rgba(${50 + index * 50}, ${150 - index * 30}, 200, 0.6)`,
+      borderColor: `rgba(${50 + index * 50}, ${150 - index * 30}, 200, 1)`,
+      borderWidth: 1,
+    })),
+  };
