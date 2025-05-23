@@ -288,3 +288,20 @@ const TeaProductionChart = () => {
                     margin: "auto" 
                     }} 
                 />
+                ) : (
+            <Bar data={{ labels, datasets }} options={chartOptions} />
+            )}
+        </div>
+        {/* <div className="checkboxContainer">
+            <h3>Select Elevation Types:</h3>
+            {Object.keys(selectedElevations).map((elevation) => (
+            <label key={elevation} style={{ marginRight: '15px' }}>
+                <input
+                type="checkbox"
+                checked={selectedElevations[elevation]}
+                onChange={() => handleCheckboxChange(elevation)}
+                />
+                {elevation}
+            </label>
+            ))}
+        </div> */}
