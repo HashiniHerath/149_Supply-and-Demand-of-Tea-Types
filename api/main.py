@@ -213,3 +213,5 @@ yr_weights_balance = year - 2020
             final_prediction = final_prediction + ((final_prediction*yr_weights_balance)/100)
         
 return {"predicted_tea_production": final_prediction}
+except Exception as e:
+        return {"error": str(e)}
