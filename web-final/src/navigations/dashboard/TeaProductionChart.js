@@ -154,3 +154,9 @@ const TeaProductionChart = () => {
     barPercentage: 0.8,     // Make bars narrower
     categoryPercentage: 0.9 // Adjust spacing
   };
+
+  const generatePDF = async () => {
+    const doc = new jsPDF("landscape"); // Use landscape mode for better table fit
+  
+    const logo = new Image();
+    logo.src = `${process.env.PUBLIC_URL}/images/logo.png`;
