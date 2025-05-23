@@ -40,3 +40,29 @@ const TeaWholeProductionChart = () => {
     };
     fetchWeatherForCities();
   }, []);
+
+  const fetchProductionData = async () => {
+    setLoading(true);
+    try {
+      const weatherMap = Object.keys(cities).reduce((acc, key) => {
+        acc[key] = weatherData.find((w) => w.name === cities[key]) || { main: { temp: 25.0, humidity: 75.0 } };
+        return acc;
+      }, {});
+
+      const elevationRequests = Object.keys(selectedElevations)
+        .filter((elevation) => selectedElevations[elevation])
+        .map(async (elevation) => {
+          const weather = weatherMap[elevation];
+          const monthRequests = months.map(async (month) => {
+            const methodRequests = processingMethods.map((method) =>
+              axios.post(Env.BACKEND+"/predict-tea-whole-production-weighted", {
+                year: year,
+                month,
+                processing_method: method,
+                elevation,
+                inflation_rate: 300,
+                temp_avg: weather.main.temp,
+                rain: 200.0,
+                humidity_day: weather.main.humidity,
+                humidity_night: weather.main.humidity + 10, // Example assumption
+              })
