@@ -321,3 +321,20 @@ const TeaProductionChart = () => {
                       <span style={{ margin: "0 20px", fontSize: "1.2rem", fontWeight: "bold" }}>{year}</span>
                       <button style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px", fontSize: '20px' }} onClick={() => changeYear(1)}><FaArrowRight /></button>
                   </div>
+                  </div>
+        <div style={{ marginTop: '20px' }}>
+            <button onClick={generatePDF} style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                marginTop: '20px', 
+                backgroundColor: 'green', 
+                color: 'white', 
+                border: 'none', 
+                cursor: 'pointer', 
+                transition: '0.3s',
+                borderRadius: '10px'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'lightgreen';
+                e.target.style.color = 'black';
+              }}
