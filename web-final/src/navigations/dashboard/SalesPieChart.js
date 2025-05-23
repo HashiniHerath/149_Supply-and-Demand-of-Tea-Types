@@ -452,3 +452,20 @@ const SalesPieChart = () => {
               </div>
             </div>
           )}
+                  </div>
+        <div style={{ width: "50%", marginTop: "20px", display: "flex", alignItems: "center" }}>
+          <h3>Sales Code: {salesCode}</h3>
+          <select
+            value={salesCode}
+            onChange={(e) => {
+              handleSalesCodeChange(Number(e.target.value));
+              fetchSalesData();
+              fetchBarChartData();
+            }}
+            style={{ marginLeft: "20px", padding: "5px", borderRadius: "5px", fontSize: "16px" }}
+          >
+            {[...Array(50)].map((_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
