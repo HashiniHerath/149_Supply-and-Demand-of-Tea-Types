@@ -49,3 +49,8 @@ class PredictionInput(BaseModel):
                 detail=f"No model available for the country: {country.capitalize()}",
             )
         
+# Sales Tea Types (BP1 and PF1)
+rf_model_bp1 = joblib.load("sales/tea_types/model_sales_ttbp1v2.joblib")  
+rf_model_pf1 = joblib.load("sales/tea_types/model_sales_ttpf1v2.joblib")
+
+        
