@@ -500,3 +500,53 @@ const SalesPieChart = () => {
             onClick={() => {
               navigate('/sales');
             }}
+                        style={{
+              padding: '10px 20px',
+              fontSize: '16px',
+              marginTop: '20px',
+              marginLeft: '20px',
+              backgroundColor: '#8e44ad',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer',
+              transition: '0.3s',
+              borderRadius: '10px',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#9b59b6';
+              e.target.style.color = 'black';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#8e44ad';
+              e.target.style.color = 'white';
+            }}
+          >
+            In Bar Chart
+          </button>
+          <button 
+            onClick={generateSPDF} 
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '16px', 
+              marginTop: '20px', 
+              marginLeft: '20px',
+              backgroundColor: 'green', 
+              color: 'white', 
+              border: 'none', 
+              cursor: 'pointer', 
+              transition: '0.3s',
+              borderRadius: '10px'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'lightgreen';
+              e.target.style.color = 'black';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'green';
+              e.target.style.color = 'white';
+            }}
+          >
+            Generate PDF Report
+          </button>
+        </div>
+      </div>
