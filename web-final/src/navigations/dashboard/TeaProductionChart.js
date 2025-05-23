@@ -137,3 +137,17 @@ const TeaProductionChart = () => {
         formatter: (value) => value !== 0 ? value : ''
       }
     },
+    scales: {
+      x: { 
+        title: { display: true, text: 'Year - Month' },
+        grid: { display: false }  // Clean up grid lines
+      },
+      y: { 
+        title: { display: true, text: 'Estimated Quantity (Kg)' }, 
+        beginAtZero: false,  // Don't force zero baseline
+        min: 'auto',        // Let chart adjust minimum
+        ticks: {
+          precision: 1      // Show decimal places if needed
+        }
+      },
+    },
