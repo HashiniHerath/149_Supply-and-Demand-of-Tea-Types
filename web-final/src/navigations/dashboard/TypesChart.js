@@ -82,3 +82,15 @@ const TypesChart = () => {
       [quantity]: !prev[quantity],
     }));
   };
+
+  // Prepare chart data
+  const chartData = {
+    labels: Object.keys(demandData).map((tea) => tea),
+    datasets: Object.keys(demandData).map((tea, index) => ({
+      label: `${tea} Tea Demand`,
+      data: Object.values(demandData[tea]),
+      backgroundColor: `rgba(${50 + index * 50}, ${150 - index * 30}, 200, 0.6)`,
+      borderColor: `rgba(${50 + index * 50}, ${150 - index * 30}, 200, 1)`,
+      borderWidth: 1,
+    })),
+  };
