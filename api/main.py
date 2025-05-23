@@ -206,4 +206,9 @@ except Exception as e:
         # Average predictions
         final_prediction = np.mean(predictions)
 
+yr_weights_balance = year - 2020
 
+        final_prediction = np.sum(predictions * weights)
+        if(yr_weights_balance > 0):
+            final_prediction = final_prediction + ((final_prediction*yr_weights_balance)/100)
+        
