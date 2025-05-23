@@ -101,3 +101,12 @@ const TeaProductionChart = () => {
       [elevation]: !prev[elevation],
     }));
   };
+
+  // Prepare data for the chart
+  const labels = months.map(month => `${year}-${month}`);
+  const datasets = Object.keys(chartData).flatMap((elevation, index) =>
+    processingMethods.map((method, methodIndex) => ({
+      label: `${elevation} - ${method}`,
+      data: labels.map(monthLabel => {
+        const month = parseInt(monthLabel.split('-')[1]);
+        const monthData = chartData[elevation]?.find(data => data.month === month);
