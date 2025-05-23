@@ -110,3 +110,13 @@ const TeaProductionChart = () => {
       data: labels.map(monthLabel => {
         const month = parseInt(monthLabel.split('-')[1]);
         const monthData = chartData[elevation]?.find(data => data.month === month);
+        // console.log(monthData)
+        return monthData
+          ? monthData.data.find(d => d.method === method)?.estimated_quantity || 0
+          : 0;
+      }),
+      backgroundColor: `rgba(${50 + index * 50}, ${100 + methodIndex * 30}, 200, 0.6)`,
+      borderColor: `rgba(${50 + index * 50}, ${100 + methodIndex * 30}, 200, 1)`,
+      borderWidth: 1,
+    }))
+  );
