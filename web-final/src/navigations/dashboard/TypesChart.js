@@ -42,3 +42,19 @@ const TypesChart = () => {
           month: 6,
           inflation_rate: 2.5, // Example inflation rate
         });
+
+        // Simulate the response data for different quantity levels
+        const data = {
+          CTC: quantityLevels.reduce((acc, level) => {
+            acc[level] = Math.random() * 1000 + 100; // Simulated data
+            return acc;
+          }, {}),
+          Green: quantityLevels.reduce((acc, level) => {
+            acc[level] = Math.random() * 1000 + 100; // Simulated data
+            return acc;
+          }, {}),
+          Orthodox: quantityLevels.reduce((acc, level) => {
+            acc[level] = Math.random() * 1000 + 100; // Simulated data
+            return acc;
+          }, {}),
+        };
