@@ -160,4 +160,16 @@ MULTI_MODELS_WHOLE_PROD = {
     "Extra Trees": loaded_model_wp3
 }
 
+class TeaProductionInput(BaseModel):
+    year: int
+    month: int
+    processing_method: str
+    elevation: str
+    production_total: float
+    inflation_rate: float
+    temp_avg: float
+    rain: float
+    humidity_day: float
+    humidity_night: float
+
 
