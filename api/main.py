@@ -195,5 +195,10 @@ except Exception as e:
         error_message = traceback.format_exc()
         print(error_message)
         raise HTTPException(status_code=500, detail=f"Error during prediction: {str(e)}")
+# Create input data as DataFrame
+        input_data = pd.DataFrame([[year, month, processing_method_encoded, elevation_encoded, production_total, 
+                                    inflation_rate, temp_avg, rain, humidity_day, humidity_night]],
+                                  columns=["year", "month", "Processing Method", "Elevation", "production Total (kg)",
+                                           "inflation rate", "Temp AVG", "Rain", "Humidity Day", "Humidity Night"])
 
 
