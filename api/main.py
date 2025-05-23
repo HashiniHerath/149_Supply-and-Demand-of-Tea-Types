@@ -21,3 +21,5 @@ app.add_middleware(
 
 # Load Models
 sales_model = joblib.load('sales/model_sales_quantity_new.joblib')
+
+types_model = joblib.load('tea_type_demand_rf.joblib')
