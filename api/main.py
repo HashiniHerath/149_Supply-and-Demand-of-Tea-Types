@@ -94,6 +94,17 @@ MULTI_MODELS_DEMAND = {
     "Extra Trees": loaded_model_3
 }
 
+# FastAPI endpoint
+@app.post("/predict-tea-production-weighted")
+async def predict_lm_w(input_data: TeaProductionInput):
+    result = predict_lm_weighted(
+        input_data.year, input_data.month, input_data.processing_method, input_data.elevation, 
+        input_data.production_total, input_data.inflation_rate, input_data.temp_avg, 
+        input_data.rain, input_data.humidity_day, input_data.humidity_night
+    )
+
+    return result
+
 def predict_tea_whole_production_weighted(year, month, processing_method, elevation, 
                                     inflation_rate, temp_avg, rain, humidity_day, humidity_night):
     try:
