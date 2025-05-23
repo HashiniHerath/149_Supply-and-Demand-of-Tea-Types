@@ -61,4 +61,16 @@ class PredictionRequest(BaseModel):
     # avg_price: float
     sales_code: int
     tea_type: str  # Either 'BP1' or 'PF1'
+
+
+    # Define prediction function
+def predict_price(model, year, dollar_rate, elevation, sales_code):
+    input_data = np.array([[year, sales_code, dollar_rate, elevation]])
+    prediction = model.predict(input_data)
+    yr_weights_balance = year - 2020
+    final_prediction = prediction[0]
+
+    if(yr_weights_balance > 0):
+            final_prediction = final_prediction + (0.1*(final_prediction*yr_weights_balance)/100)
+    return final_prediction
         
