@@ -5,3 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from collections import defaultdict
 from typing import Dict, List
+
+# Load environment variables
+load_dotenv()
