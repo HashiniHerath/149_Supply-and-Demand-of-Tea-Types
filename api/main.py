@@ -73,4 +73,15 @@ def predict_price(model, year, dollar_rate, elevation, sales_code):
     if(yr_weights_balance > 0):
             final_prediction = final_prediction + (0.1*(final_prediction*yr_weights_balance)/100)
     return final_prediction
+
+
+    @app.post("/predict-sales-unit-price")
+async def predict_tea_price(request: PredictionRequest):
+    # Select the correct model based on tea type
+    if request.tea_type.upper() == "BP1":
+        model = rf_model_bp1
+    elif request.tea_type.upper() == "PF1":
+        model = rf_model_pf1
+    else:
+        raise HTTPException(status_code=400, detail="Invalid tea type. Choose 'BP1' or 'PF1'.")
         
