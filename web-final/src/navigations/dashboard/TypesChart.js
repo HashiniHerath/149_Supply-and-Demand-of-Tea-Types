@@ -124,3 +124,16 @@ const TypesChart = () => {
           color: "#333",
         },
       },
+      y: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Predicted Quantity (Kg)",
+          color: "#333",
+        },
+        beginAtZero: true,
+      },
+    },
+  };
