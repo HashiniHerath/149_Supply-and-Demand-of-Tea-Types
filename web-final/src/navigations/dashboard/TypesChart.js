@@ -160,4 +160,23 @@ const TypesChart = () => {
       border: "1px solid #0056b3",
     },
   };
+return (
+    <div className="chart">
+      <div className="cardHeader">
+        <h2 style={{ textAlign: "center" }}>Local Market Release Prediction</h2>
+      </div>
 
+      <div style={tabStyles.container}>
+        {["CTC TEA", "GREEN TEA", "ORTHODOX"].map((type) => (
+          <div
+            key={type}
+            style={{
+              ...tabStyles.tab,
+              ...(selectedType === type ? tabStyles.activeTab : {}),
+            }}
+            onClick={() => handleTypeChange(type)}
+          >
+            {type}
+          </div>
+        ))}
+      </div>
