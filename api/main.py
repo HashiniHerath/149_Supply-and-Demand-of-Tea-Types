@@ -26,3 +26,29 @@ types_model = joblib.load('tea_type_demand_rf.joblib')
 
 
 elevation_map = {'High grown': 0, 'Low grown': 1, 'Mid grown': 2, 'Unknown': 3}
+
+# Pydantic model for Sales Predict
+class PredictionInput(BaseModel):
+    year: float
+    dollar_rate: float
+    elevation: str  # Input elevation as a string
+    avg_price: float
+    sales_code: int
+
+    @app.post("/predict/sales-quantity")
+    async def predict_sales_quantity(input_data: PredictionInput):
+        print(input_data)
+
+    @app.post("/predict/demand")
+    async def predict_demand(input_data: DemandPredictionInput):
+        print(input_data.CH_CPI)
+    
+    try:
+        # Ensure the country has a corresponding model
+        country = input_data.country.lower()
+        if country not in models:
+            raise HTTPException(
+                status_code=400,
+                detail=f"No model available for the country: {country.capitalize()}",
+            )
+        
