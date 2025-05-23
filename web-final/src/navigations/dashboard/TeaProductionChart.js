@@ -184,3 +184,10 @@ const TeaProductionChart = () => {
       // Add Report Title
       doc.setFontSize(16);
       doc.text("Tea Local Production Release Report", 10, 60);
+
+      // Capture the chart as an image
+      const chartElement = document.querySelector(".chartContainer");
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          doc.addImage(imgData, "PNG", 10, 70, 260, 120); // Adjust size for landscape layout
