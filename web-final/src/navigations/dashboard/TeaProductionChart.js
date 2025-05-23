@@ -164,3 +164,8 @@ const TeaProductionChart = () => {
     logo.onload = () => {
       // Add TeaVerse logo
       doc.addImage(logo, "PNG", 10, 10, 50, 30);
+
+      // Add TeaVerse title
+      doc.setFontSize(22);
+      doc.setTextColor(40, 40, 40);
+      doc.text("TeaVerse", 70, 20);
