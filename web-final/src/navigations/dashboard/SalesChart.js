@@ -151,3 +151,67 @@ const SalesChart = () => {
       borderWidth: 1,
     })),
   };
+
+    // Calculate min and max values for the y-axis
+  const allValues = Object.values(salesData).flatMap(elevationData => 
+    elevationData.map(data => data.predicted_quantity)
+  );
+  const minValue = Math.min(...allValues);
+  const maxValue = Math.max(...allValues);
+  
+  // Calculate padding to make differences more visible
+  const rangePadding = Math.max((maxValue - minValue) * 0.2, maxValue * 0.1);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: { color: '#333' },
+      },
+      title: {
+        display: true,
+        text: 'Predicted Sales Quantity Over 5 Years by Elevation',
+        color: '#333',
+        font: { size: 18 },
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return `${context.dataset.label}: ${context.raw.toFixed(2)} Kg`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#333' },
+        title: {
+          display: true,
+          text: 'Year',
+          color: '#333',
+        },
+      },
+      y: {
+        ticks: { 
+          color: '#333',
+          callback: function(value) {
+            return Math.round(value); // Remove decimal points from y-axis ticks
+          }
+        },
+        title: {
+          display: true,
+          text: 'Sales Quantity (Kg)',
+          color: '#333',
+        },
+        min: Math.max(0, minValue - rangePadding),
+        max: maxValue + rangePadding,
+      },
+    },
+    animation: {
+      duration: 1000,
+      easing: 'easeOutQuart'
+    },
+    barPercentage: 0.8,
+    categoryPercentage: 0.9
+  };
