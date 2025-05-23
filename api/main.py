@@ -18,3 +18,6 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
 )
+
+# Load Models
+sales_model = joblib.load('sales/model_sales_quantity_new.joblib')
