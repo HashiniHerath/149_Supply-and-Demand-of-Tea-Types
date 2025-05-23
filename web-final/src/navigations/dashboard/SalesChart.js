@@ -215,3 +215,57 @@ const SalesChart = () => {
     barPercentage: 0.8,
     categoryPercentage: 0.9
   };
+
+    return (
+    <div className="chart" style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+      <div style={{ width: '100%', paddingLeft: '40px' }}>
+        <div className="chartContainer">
+          {loading ? (
+            <img 
+              src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`} 
+              className="blog-image" 
+              style={{ width: "250px", height: "250px", objectFit: "contain", display: "block", margin: "auto" }} 
+            />
+          ) : (
+            <Bar data={chartData} options={options} />
+          )}
+        </div>
+       
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+          <div style={{ marginTop: '20px' }}>
+            <div className="checkboxContainer">
+              <h3>Select Elevation Types:</h3>
+              {Object.keys(selectedElevations).map((elevation) => (
+                <label key={elevation} style={{ marginRight: '15px' }}>
+                  <input
+                    type="checkbox"
+                    checked={selectedElevations[elevation]}
+                    onChange={() => handleCheckboxChange(elevation)}
+                  />
+                  {elevation}
+                </label>
+              ))}
+            </div>
+
+            <div style={{ marginTop: '20px' }}>
+              <div>
+                <label>Dollar Rate:</label>
+                <input
+                  type="number"
+                  value={dollarRate}
+                  onChange={(e) => setDollarRate(Number(e.target.value))}
+                  style={{ marginLeft: '10px', padding: '5px' }}
+                />
+                {errors.dollarRate && <span style={{ color: 'red', marginLeft: '10px' }}>{errors.dollarRate}</span>}
+              </div>
+              <div style={{ marginTop: '10px' }}>
+                <label>Average Price:</label>
+                <input
+                  type="number"
+                  value={avgPrice}
+                  onChange={(e) => setAvgPrice(Number(e.target.value))}
+                  style={{ marginLeft: '10px', padding: '5px' }}
+                />
+                {errors.avgPrice && <span style={{ color: 'red', marginLeft: '10px' }}>{errors.avgPrice}</span>}
+              </div>
+            </div>
