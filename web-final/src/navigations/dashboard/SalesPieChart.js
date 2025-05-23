@@ -333,3 +333,39 @@ const SalesPieChart = () => {
       }
     },
   };
+
+    const barChartOptions = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Tea types' unit price Over Coming 5 Years",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Year',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Predicted Unit Price (Rs.)',
+        },
+        type: 'linear',
+        min: Math.min(...Object.values(barChartData)) - 10,
+        max: Math.max(...Object.values(barChartData)) + 10,
+        ticks: {
+          stepSize: 5,
+          callback: function(value) {
+            return 'Rs. ' + Math.round(value); // Round to remove decimals
+          }
+        }
+      },
+    },
+  };
