@@ -169,3 +169,10 @@ const TeaProductionChart = () => {
       doc.setFontSize(22);
       doc.setTextColor(40, 40, 40);
       doc.text("TeaVerse", 70, 20);
+
+      // Add company details (small font)
+      doc.setFontSize(10);
+      doc.setTextColor(100);
+      doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
+      doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
+      doc.text("Website: www.teaverse.com", 70, 44);
