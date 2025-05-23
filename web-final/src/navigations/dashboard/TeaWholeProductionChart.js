@@ -165,4 +165,75 @@ const TeaWholeProductionChart = () => {
       doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
       doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
       doc.text("Website: www.teaverse.com", 70, 44);
+  // Add horizontal line
+      doc.setDrawColor(150);
+      doc.line(10, 50, 280, 50);
   
+      // Add Report Title
+      doc.setFontSize(16);
+      doc.text("Tea Whole Production Release Report", 10, 60);
+  
+      // Capture the chart as an image
+      const chartElement = document.querySelector(".chartContainer");
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          doc.addImage(imgData, "PNG", 10, 70, 260, 120); // Adjust size for landscape layout
+  
+          // Add Table Title
+          doc.setFontSize(14);
+          doc.text("Estimated Production Data Table", 10, 200);
+  
+          // Prepare table data
+          const tableData = [];
+          Object.keys(chartData).forEach((elevation) => {
+            chartData[elevation].forEach(({ month, data }) => {
+              data.forEach(({ method, estimated_quantity }) => {
+                tableData.push([
+                  elevation,
+                  `${year}-${String(month).padStart(2, "0")}`,
+                  method,
+                  estimated_quantity,
+                ]);
+              });
+            });
+          });
+  
+          // Add Table with autoTable
+          doc.autoTable({
+            head: [
+              ["Elevation", "Year-Month", "Processing Method", "Estimated Quantity (Kg)"],
+            ],
+            body: tableData,
+            startY: 210, // Ensure proper spacing after the chart
+          });
+  
+          // Save the PDF
+          doc.save("Tea_whole_Production_Estimation_Report.pdf");
+        });
+      }
+    };
+  };
+
+  return (
+    <div className="chart" style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+      <div style={{ width: "25%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+        {/* Weather Update */}
+        <img src={`${process.env.PUBLIC_URL}/images/tea-grown.png`} alt="Weather" style={{ width: "100%", height: "auto" }} />
+        <div style={{ display: "flex", flexDirection: "column", marginTop: "10px" }}>
+          {weatherData.map((weather, index) => (
+            <div key={index} className="weather-token" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "5px", backgroundColor: "#6dedab", borderRadius: "10px" }}>
+              <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`} height={45} alt="weather-icon" />
+              <span style={{ fontWeight: "bold" }}>{weather.name}</span>
+              <div>
+                <small>Temperature</small>
+                <p>{weather.main.temp}°C</p>
+              </div>
+              <div>
+                <small>Humidity</small>
+                <p>{weather.main.humidity}%</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
