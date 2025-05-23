@@ -66,7 +66,7 @@ const TeaWholeProductionChart = () => {
                 humidity_day: weather.main.humidity,
                 humidity_night: weather.main.humidity + 10, // Example assumption
               })
-              );
+            );
 
             const responses = await Promise.all(methodRequests);
             return {
@@ -165,7 +165,8 @@ const TeaWholeProductionChart = () => {
       doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
       doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
       doc.text("Website: www.teaverse.com", 70, 44);
-  // Add horizontal line
+  
+      // Add horizontal line
       doc.setDrawColor(150);
       doc.line(10, 50, 280, 50);
   
@@ -232,7 +233,13 @@ const TeaWholeProductionChart = () => {
               <div>
                 <small>Humidity</small>
                 <p>{weather.main.humidity}%</p>
-                <div style={{ width: "75%", paddingLeft: "40px" }}>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ width: "75%", paddingLeft: "40px" }}>
         <div className="chartContainer">
           {loading ? (
             <img
@@ -317,9 +324,3 @@ const TeaWholeProductionChart = () => {
 };
 
 export default TeaWholeProductionChart;
-
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
