@@ -37,9 +37,9 @@ class PredictionInput(BaseModel):
     sales_code: int
 
 
-    @app.post("/predict/demand")
-    async def predict_demand(input_data: DemandPredictionInput):
-        print(input_data.CH_CPI)
+@app.post("/predict/demand")
+async def predict_demand(input_data: DemandPredictionInput):
+    print(input_data.CH_CPI)
     
     try:
         # Ensure the country has a corresponding model
