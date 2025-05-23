@@ -469,3 +469,34 @@ const SalesPieChart = () => {
                 {index + 1}
               </option>
             ))}
+                     </select>
+          <button
+            style={{ marginLeft: "20px", borderRadius: "50%", padding: "5px" }}
+            onClick={() => {
+              if (salesCode > 1) {
+                handleSalesCodeChange(salesCode - 1);
+                fetchSalesData();
+                fetchBarChartData();
+              }
+            }}
+          >
+            <FaMinus size={20} />
+          </button>
+          <button
+            style={{ marginLeft: "10px", borderRadius: "50%", padding: "5px" }}
+            onClick={() => {
+              if (salesCode < 50) {
+                handleSalesCodeChange(salesCode + 1);
+                fetchSalesData();
+                fetchBarChartData();
+              }
+            }}
+          >
+            <FaPlus size={20} />
+          </button>
+        </div>
+        <div style={{ marginTop: '20px' }}>
+          <button
+            onClick={() => {
+              navigate('/sales');
+            }}
