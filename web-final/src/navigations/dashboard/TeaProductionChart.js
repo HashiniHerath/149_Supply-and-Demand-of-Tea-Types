@@ -338,3 +338,11 @@ const TeaProductionChart = () => {
                 e.target.style.backgroundColor = 'lightgreen';
                 e.target.style.color = 'black';
               }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'green';
+                e.target.style.color = 'white';
+              }}>
+            Generate PDF Report
+            </button>
+            <button onClick={() => {
+              navigate('/tea-types-whole')
