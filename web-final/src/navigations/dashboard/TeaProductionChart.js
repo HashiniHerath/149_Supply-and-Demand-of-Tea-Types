@@ -151,3 +151,6 @@ const TeaProductionChart = () => {
         }
       },
     },
+    barPercentage: 0.8,     // Make bars narrower
+    categoryPercentage: 0.9 // Adjust spacing
+  };
