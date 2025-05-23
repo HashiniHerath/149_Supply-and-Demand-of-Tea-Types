@@ -219,3 +219,10 @@ const TeaProductionChart = () => {
             body: tableData,
             startY: 210, // Ensure proper spacing after the chart
           });
+
+          // Save the PDF
+          doc.save("Tea_Production_Estimation_Report.pdf");
+        });
+      }
+    };
+  };
