@@ -183,4 +183,13 @@ class TeaProductionInput(BaseModel):
     humidity_day: float
     humidity_night: float
 
+    # Dummy label encoding function (Replace with actual encoding logic)
+def encode_labels(processing_method, elevation):
+    processing_method_mapping = {"Orthodox": 0, "CTC": 1, "Green": 2}
+    elevation_mapping = {"Low": 0, "Medium": 1, "High": 2}
+
+    return (processing_method_mapping.get(processing_method, -1), 
+            elevation_mapping.get(elevation, -1))
+
+
 
