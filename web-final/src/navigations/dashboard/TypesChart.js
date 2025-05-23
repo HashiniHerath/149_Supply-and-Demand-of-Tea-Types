@@ -74,3 +74,11 @@ const TypesChart = () => {
   const handleTypeChange = (type) => {
     setSelectedType(type);
   };
+
+    // Handle quantity filter change (HIGH, LOW, MEDIUM)
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantities((prev) => ({
+      ...prev,
+      [quantity]: !prev[quantity],
+    }));
+  };
