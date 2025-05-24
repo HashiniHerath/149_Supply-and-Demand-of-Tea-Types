@@ -449,3 +449,10 @@ async def get_google_trends(request: TrendRequest):
             except TooManyRequestsError:
                 print(f"Too many requests for topic: {topic}. Retrying after 5 minutes.")
                 time.sleep(300)  # Wait before retrying
+
+    return {
+        "trend_data": {
+            **trend_data,
+            "dates": shared_dates
+        }
+    }
