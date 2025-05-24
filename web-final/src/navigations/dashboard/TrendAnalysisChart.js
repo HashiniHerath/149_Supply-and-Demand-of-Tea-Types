@@ -89,3 +89,62 @@ const TrendAnalysisChart = () => {
       },
     ],
   };
+
+  const thisYearData = {
+    labels: ["Green Tea", "Black Tea", "White Tea"],
+    datasets: [
+      {
+        data: [
+          trendData["Green Tea"] ? trendData["Green Tea"][trendData["Green Tea"].length - 1] : 0,
+          trendData["Black Tea"] ? trendData["Black Tea"][trendData["Black Tea"].length - 1] : 0,
+          trendData["White Tea"] ? trendData["White Tea"][trendData["White Tea"].length - 1] : 0,
+        ],
+        backgroundColor: ["green", "black", "yellow"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "#333",
+        },
+      },
+      title: {
+        display: true,
+        text: `Google Trends Data for Tea Types Over 5 Years`,
+        color: "#333",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Year",
+          color: "#333",
+        },
+      },
+      y: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Interest",
+          color: "#333",
+        },
+        beginAtZero: true,
+      },
+    },
+  };
+
