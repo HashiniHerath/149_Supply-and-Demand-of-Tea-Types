@@ -420,3 +420,20 @@ async def get_google_trends(request: TrendRequest):
                 time.sleep(300)
 
     return {"trend_data": data}
+
+@app.post("/get-google-trends-dates")
+async def get_google_trends(request: TrendRequest):
+    """
+    Fetches Google Trends data for the specified topics over the last 5 years.
+    """
+    pytrends = TrendReq(hl='en-US', tz=360)
+    topics = request.topics
+    trend_data = {}
+    shared_dates = []
+
+    for idx, topic in enumerate(topics):
+        while True:
+            try:
+                # Build the payload for the topic
+                pytrends.build_payload([topic], timeframe='today 5-y', geo='', gprop='')
+                interest_over_time = pytrends.interest_over_time()
