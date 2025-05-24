@@ -168,3 +168,27 @@ async def fetch_and_analyze_posts(query: str = "tea", count: int = 20) -> List[Y
         raise HTTPException(status_code=400, detail="Invalid JSON format.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+def fetch_twitter_data(query: str, count: int) -> str:
+    """
+    Fetches Twitter data using the Twitter API.
+
+    Args:
+        query (str): Search query for Twitter data.
+        count (int): Number of posts to retrieve.
+
+    Returns:
+        str: JSON string containing Twitter data.
+    """
+    conn = http.client.HTTPSConnection("twitter241.p.rapidapi.com")
+
+    headers = {
+        'x-rapidapi-key': "6496790f8bmsha07b1cf7256f9c2p1995fbjsne7ca8be11817",
+        'x-rapidapi-host': "twitter241.p.rapidapi.com"
+    }
+
+    conn.request("GET", f"/search-v2?type=Top&count={count}&query={query}", headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+
+    return data.decode("utf-8")
