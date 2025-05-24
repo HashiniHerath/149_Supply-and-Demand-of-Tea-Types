@@ -493,3 +493,6 @@ async def get_google_trends_RAPID(request: TrendRequest):
                 "related_keywords": keywords # Related search terms
             }
 
+            time.sleep(2)  
+
+
