@@ -62,3 +62,12 @@ const InstagramPostAnalysisChart = () => {
     const dates = Object.keys(postAnalysisData[keyword]);
     return [...acc, ...dates];
   }, []);
+
+  const filteredMonths = Array.from(new Set(months))
+    .filter((month) => {
+      const [year, monthNum] = month.split("-").map(Number); // Extract year and month
+      if (year > 2025) return false; // Exclude future years
+      if (year === currentYear && monthNum > currentMonth) return false; // Exclude future months in current year
+      return true;
+    })
+    .sort();
