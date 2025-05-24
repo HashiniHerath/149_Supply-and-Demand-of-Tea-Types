@@ -25,3 +25,20 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const InstagramPostAnalysisChart = () => {
+  const [postAnalysisData, setPostAnalysisData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      setLoading(true);
+
+      try {
+        const response = await axios.post(
+          Env.BACKEND+"/count_items_by_year_month_instagram",
+          {
+            keywords: ["Black_Tea", "White_Tea", "Green_tea"],
+          }
+        );
+
