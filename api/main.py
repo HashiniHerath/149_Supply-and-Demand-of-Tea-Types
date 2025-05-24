@@ -312,3 +312,16 @@ async def get_post_counts_facebook(request: KeywordsRequest):
 
     ## Return the results
     return result
+
+# Instagram
+def count_items_by_year_month(data):
+    """
+    Counts items based on year and month from the device_timestamp.
+
+    Args:
+        data (dict): The parsed JSON response containing the items.
+
+    Returns:
+        dict: A dictionary with keys as (year, month) and values as counts.
+    """
+    grouped_data = defaultdict(int)
