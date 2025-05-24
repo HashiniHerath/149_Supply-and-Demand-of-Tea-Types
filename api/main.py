@@ -268,3 +268,25 @@ async def fetch_and_count_posts_facebook(keywords):
     }
 
     results = {}
+
+    for query in keywords:
+        try:
+            # API request for the given keyword
+            conn.request("GET", f"/search/posts?query={query}", headers=headers)
+            res = conn.getresponse()
+            data = res.read()
+
+            # Parse the response data
+            response_data = json.loads(data.decode("utf-8"))
+
+            # Count posts by year
+            year_counts = count_posts_by_year(response_data)
+
+            # Store the results for this keyword
+            results[query] = year_counts
+
+        except Exception as e:
+            # Handle any errors for the keyword
+            results[query] = {"error": str(e)}
+
+    return results
