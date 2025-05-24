@@ -5,6 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from collections import defaultdict
 from typing import Dict, List
+from tweepy import OAuth1UserHandler, API
+from pytrends.request import TrendReq
+from pytrends.exceptions import TooManyRequestsError
+from datetime import datetime
+import time
+import traceback
+import http.client
+import json
+import numpy as np
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 #fast api
 
@@ -101,3 +115,56 @@ async def predict_tea_price(request: PredictionRequest):
 
     return {"tea_type": request.tea_type, "predicted_unit": predicted_quantity}
 
+####Tea Trend Analysis
+
+# Twitter API credentials
+API_KEY = "6496790f8bmsha07b1cf7256f9c2p1995fbjsne7ca8be11817"
+API_SECRET_KEY = "SKHmppgEHdjhWo5UdAOuyccDELGema5KiNqZM2VFGBxi03sRLF"
+ACCESS_TOKEN = "Q0NKb2k1cEhrWEpZMXpVRlN4S2o6MTpjaQ"
+ACCESS_TOKEN_SECRET = "OEe2ThJ1z5-UIrpoh92Jfvxi6ryKKkOjJoCbGCikwkpRXX03HF"
+
+# Authenticate with Twitter API
+auth = OAuth1UserHandler(API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+twitter_api = API(auth)
+
+
+# Anlyze Twitter 
+class YearlyPostCount(BaseModel):
+    year: int
+    post_count: int
+
+@app.get("/fetch-and-analyze-posts")
+async def fetch_and_analyze_posts(query: str = "tea", count: int = 20) -> List[YearlyPostCount]:
+    """
+    Fetches posts from the Twitter API, processes post data, groups posts by year, and counts them.
+
+    Args:
+        query (str): Search query for Twitter data.
+        count (int): Number of posts to retrieve.
+
+    Returns:
+        List[YearlyPostCount]: List of post counts grouped by year.
+    """
+    try:
+        # Make request to Twitter API
+        data_string = fetch_twitter_data(query, count)
+
+        # Extract posts with content and dates
+        posts = extract_posts_with_dates(data_string)
+        if not posts:
+            raise HTTPException(status_code=400, detail="No valid posts found in the data.")
+
+        # Group posts by year and count them
+        year_counts = group_posts_by_year(posts)
+
+        # Convert to sorted list of YearlyPostCount
+        yearly_post_counts = sorted(
+            [YearlyPostCount(year=year, post_count=count) for year, count in year_counts.items()],
+            key=lambda x: x.year
+        )
+
+        return yearly_post_counts
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON format.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
