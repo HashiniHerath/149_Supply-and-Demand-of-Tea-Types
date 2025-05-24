@@ -325,3 +325,12 @@ def count_items_by_year_month(data):
         dict: A dictionary with keys as (year, month) and values as counts.
     """
     grouped_data = defaultdict(int)
+
+    for item in data.get("data", {}).get("items", []):
+        timestamp = item.get("device_timestamp")
+        if timestamp:
+            # Convert timestamp to seconds (assuming timestamp is in microseconds)
+            timestamp_seconds = timestamp / 1e6
+            date = datetime.fromtimestamp(timestamp_seconds)
+            key = (date.year, date.month)
+            grouped_data[key] += 1
