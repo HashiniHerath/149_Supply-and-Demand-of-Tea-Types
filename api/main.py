@@ -444,3 +444,8 @@ async def get_google_trends(request: TrendRequest):
                 trend_data[topic] = interest_over_time[topic].tolist()
 
                 time.sleep(60)
+
+                break
+            except TooManyRequestsError:
+                print(f"Too many requests for topic: {topic}. Retrying after 5 minutes.")
+                time.sleep(300)  # Wait before retrying
