@@ -44,7 +44,7 @@ async def predict_demand(input_data: DemandPredictionInput):
         # Ensure the country has a corresponding model
         country = input_data.country.lower()
         if country not in models:
-            raise HTTPException(
+            raise HTTPException( 
                 status_code=400,
                 detail=f"No model available for the country: {country.capitalize()}",
             )
@@ -59,7 +59,7 @@ async def predict_demand(input_data: DemandPredictionInput):
             raise HTTPException(
                 status_code=400,
                 detail=f"Invalid Type: {input_data.Type}. Allowed values are 'Black' or 'Green'.",
-            )
+            )  
 
         model_input = [[
             input_data.year,
