@@ -442,3 +442,5 @@ async def get_google_trends(request: TrendRequest):
                     shared_dates = interest_over_time.index.strftime('%Y-%m-%d').tolist()
 
                 trend_data[topic] = interest_over_time[topic].tolist()
+
+                time.sleep(60)
