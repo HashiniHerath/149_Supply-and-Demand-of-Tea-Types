@@ -348,7 +348,7 @@ async def fetch_and_count_keywords_instagram(keywords):
     Returns:
         dict: A dictionary with each keyword as a key and counts as values, sorted by date.
     """
-    # API connection details
+    ## API connection details
     conn = http.client.HTTPSConnection("instagram-scraper-api2.p.rapidapi.com")
     headers = {
         'x-rapidapi-key': "6496790f8bmsha07b1cf7256f9c2p1995fbjsne7ca8be11817",
