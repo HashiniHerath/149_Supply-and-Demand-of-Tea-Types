@@ -334,8 +334,25 @@ def count_items_by_year_month(data):
             date = datetime.fromtimestamp(timestamp_seconds)
             key = (date.year, date.month)
             grouped_data[key] += 1
-            
+
     # Convert defaultdict to a standard dictionary with formatted keys
      return {f"{year}-{month:02d}": count for (year, month), count in grouped_data.items()}
 
+async def fetch_and_count_keywords_instagram(keywords):
+    """
+    Fetches data for each keyword and counts items by year and month.
 
+    Args:
+        keywords (list): List of hashtags to fetch data for.
+
+    Returns:
+        dict: A dictionary with each keyword as a key and counts as values, sorted by date.
+    """
+    # API connection details
+    conn = http.client.HTTPSConnection("instagram-scraper-api2.p.rapidapi.com")
+    headers = {
+        'x-rapidapi-key': "6496790f8bmsha07b1cf7256f9c2p1995fbjsne7ca8be11817",
+        'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
+    }
+
+    results = {}
