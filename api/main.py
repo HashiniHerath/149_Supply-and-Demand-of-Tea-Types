@@ -334,3 +334,8 @@ def count_items_by_year_month(data):
             date = datetime.fromtimestamp(timestamp_seconds)
             key = (date.year, date.month)
             grouped_data[key] += 1
+            
+    # Convert defaultdict to a standard dictionary with formatted keys
+     return {f"{year}-{month:02d}": count for (year, month), count in grouped_data.items()}
+
+
