@@ -329,8 +329,8 @@ def count_items_by_year_month(data):
     for item in data.get("data", {}).get("items", []):
         timestamp = item.get("device_timestamp")
         if timestamp:
-            # Convert timestamp to seconds (assuming timestamp is in microseconds)
-            timestamp_seconds = timestamp / 1e6
+            
+            timestamp_seconds = timestamp / 1e6 # Convert timestamp to seconds (assuming timestamp is in microseconds)
             date = datetime.fromtimestamp(timestamp_seconds)
             key = (date.year, date.month)
             grouped_data[key] += 1
