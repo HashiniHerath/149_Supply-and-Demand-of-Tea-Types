@@ -474,3 +474,17 @@ async def get_google_trends_RAPID(request: TrendRequest):
 
     trend_data = {}
     shared_dates = []  
+
+    
+    for topic in request.topics:
+        try:
+            query = f"/?query={topic}&limit=10&related_keywords=true"
+            conn.request("GET", query, headers=headers)
+
+            res = conn.getresponse()
+            data = res.read()
+            response_json = json.loads(data.decode("utf-8"))
+
+            results = response_json.get("results", [])
+            keywords = response_json.get("related_keywords", [])
+
