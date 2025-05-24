@@ -249,3 +249,22 @@ def count_posts_by_year(data):
     # Sorting the years in ascending order and return the result
     sorted_year_count = dict(sorted(year_count.items()))
     return sorted_year_count
+
+async def fetch_and_count_posts_facebook(keywords):
+    """
+    Fetches posts for a list of keywords and counts them by year.
+
+    Args:
+        keywords (list): A list of keywords to fetch posts for.
+
+    Returns:
+        dict: A dictionary with keywords as keys and year counts as values.
+    """
+    # API connection details
+    conn = http.client.HTTPSConnection("facebook-scraper3.p.rapidapi.com")
+    headers = {
+        'x-rapidapi-key': "84e293cd23msh8690775f2263e8cp1b99ebjsn333d95c46206", 
+        'x-rapidapi-host': "facebook-scraper3.p.rapidapi.com"
+    }
+
+    results = {}
