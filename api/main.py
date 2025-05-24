@@ -367,3 +367,5 @@ async def fetch_and_count_keywords_instagram(keywords):
             response_data = json.loads(data.decode("utf-8"))
 
             counts = count_items_by_year_month(response_data)
+
+            sorted_counts = {k: counts[k] for k in sorted(counts)}
