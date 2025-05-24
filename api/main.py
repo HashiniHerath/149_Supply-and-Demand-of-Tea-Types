@@ -488,3 +488,8 @@ async def get_google_trends_RAPID(request: TrendRequest):
             results = response_json.get("results", [])
             keywords = response_json.get("related_keywords", [])
 
+            trend_data[topic] = {
+                "results": results,  
+                "related_keywords": keywords 
+            }
+
