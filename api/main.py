@@ -397,3 +397,26 @@ async def get_item_counts_instagram(request: KeywordsRequest):
 # Google Trend Analysis
 class TrendRequest(BaseModel):
     topics: list[str]
+
+@app.post("/get-google-trends")
+async def get_google_trends(request: TrendRequest):
+    """
+    Fetches Google Trends data for the specified topics over the last 5 years.
+    """
+    pytrends = TrendReq(hl='en-US', tz=360)
+    topics = request.topics
+    data = {}
+
+    for topic in topics:
+        while True:
+            try:
+                pytrends.build_payload([topic], timeframe='today 5-y', geo='', gprop='')
+                interest_over_time = pytrends.interest_over_time()
+                data[topic] = interest_over_time[topic].tolist()
+                
+                break
+            except TooManyRequestsError:
+                print(f"Too many requests for topic: {topic}. Retrying after 5 minutes.")
+                
+
+    return {"trend_data": data}
