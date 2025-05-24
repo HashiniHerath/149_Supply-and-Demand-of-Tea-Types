@@ -42,3 +42,11 @@ const InstagramPostAnalysisChart = () => {
           }
         );
 
+          setPostAnalysisData(response.data);
+      } catch (error) {
+        console.error("Error fetching Instagram post data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
