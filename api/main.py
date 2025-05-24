@@ -490,6 +490,6 @@ async def get_google_trends_RAPID(request: TrendRequest):
 
             trend_data[topic] = {
                 "results": results,  
-                "related_keywords": keywords 
+                "related_keywords": keywords # Related search terms
             }
 
