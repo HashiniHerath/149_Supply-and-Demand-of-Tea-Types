@@ -356,3 +356,10 @@ async def fetch_and_count_keywords_instagram(keywords):
     }
 
     results = {}
+
+    for keyword in keywords:
+        try:
+            # API request for the current keyword
+            conn.request("GET", f"/v1/hashtag?hashtag={keyword}", headers=headers)
+            res = conn.getresponse()
+            data = res.read()
