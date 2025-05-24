@@ -58,3 +58,7 @@ const InstagramPostAnalysisChart = () => {
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
 
+  const months = Object.keys(postAnalysisData).reduce((acc, keyword) => {
+    const dates = Object.keys(postAnalysisData[keyword]);
+    return [...acc, ...dates];
+  }, []);
