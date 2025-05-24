@@ -59,3 +59,33 @@ const TrendAnalysisChart = () => {
   const handleTypeChange = (type) => {
     setSelectedType(type);
   };
+
+  const lineChartData = {
+    labels: trendData["dates"] || [],
+    datasets: [
+      {
+        label: "Green Tea",
+        data: trendData["Green Tea"] || [],
+        borderColor: "green",
+        backgroundColor: "rgba(0, 255, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: "Black Tea",
+        data: trendData["Black Tea"] || [],
+        borderColor: "black",
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: "White Tea",
+        data: trendData["White Tea"] || [],
+        borderColor: "yellow",
+        backgroundColor: "rgba(255, 255, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
