@@ -393,3 +393,7 @@ async def get_item_counts_instagram(request: KeywordsRequest):
 
     # Return the results
     return result
+
+# Google Trend Analysis
+class TrendRequest(BaseModel):
+    topics: list[str]
