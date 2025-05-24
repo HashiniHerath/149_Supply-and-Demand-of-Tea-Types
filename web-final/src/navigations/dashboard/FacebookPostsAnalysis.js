@@ -52,3 +52,43 @@ const FacebookPostAnalysisChart = () => {
 
     fetchPostData();
   }, []);
+
+  // Prepare data for Line Chart
+  const chartLabels = Array.from(
+    new Set([
+      ...Object.keys(postAnalysisData["black_tea"] || {}),
+      ...Object.keys(postAnalysisData["green_tea"] || {}),
+      ...Object.keys(postAnalysisData["white_tea"] || {}),
+    ])
+  ).sort();
+
+  const lineChartData = {
+    labels: chartLabels, // x-axis labels: Years
+    datasets: [
+      {
+        label: "Black Tea",
+        data: chartLabels.map((year) => postAnalysisData["black_tea"]?.[year] || 0),
+        borderColor: "black",
+        backgroundColor: "rgba(0, 255, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: "Green Tea",
+        data: chartLabels.map((year) => postAnalysisData["green_tea"]?.[year] || 0),
+        borderColor: "green",
+        backgroundColor: "rgba(255, 255, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: "White Tea",
+        data: chartLabels.map((year) => postAnalysisData["white_tea"]?.[year] || 0),
+        borderColor: "yellow",
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
