@@ -293,7 +293,7 @@ async def fetch_and_count_posts_facebook(keywords):
 
 class KeywordsRequest(BaseModel):
     keywords: List[str]
-    
+
 # Fetch and count posts based on the provided keywords
 @app.post("/count_posts_by_year_facebook")
 async def get_post_counts_facebook(request: KeywordsRequest):
@@ -310,5 +310,5 @@ async def get_post_counts_facebook(request: KeywordsRequest):
     result = await fetch_and_count_posts_facebook(request.keywords)
     print(result)
 
-    # Return the results
+    ## Return the results
     return result
