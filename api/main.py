@@ -217,3 +217,16 @@ def extract_posts_with_dates(data_string):
                         })
 
     return posts_with_dates
+
+# Helper function: Group posts by year
+def group_posts_by_year(posts):
+    year_counts = defaultdict(int)
+    for post in posts:
+        try:
+            post_date = datetime.strptime(post['date'], '%a %b %d %H:%M:%S %z %Y')
+            year = post_date.year
+            year_counts[year] += 1
+        except Exception as e:
+            print(f"Error parsing date for post: {post}, Error: {e}")
+
+    return dict(year_counts)
