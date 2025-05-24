@@ -495,4 +495,8 @@ async def get_google_trends_RAPID(request: TrendRequest):
 
             time.sleep(2)  
 
+        except Exception as e:
+            print(f"Error fetching data for {topic}: {e}")
+            trend_data[topic] = {"error": "Failed to fetch data"}
+
 
