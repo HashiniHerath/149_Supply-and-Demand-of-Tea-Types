@@ -499,4 +499,11 @@ async def get_google_trends_RAPID(request: TrendRequest):
             print(f"Error fetching data for {topic}: {e}")
             trend_data[topic] = {"error": "Failed to fetch data"}
 
+    return {
+        "trend_data": {
+            **trend_data,
+            "dates": shared_dates
+        }
+    }
+
 
