@@ -136,3 +136,19 @@ const FacebookPostAnalysisChart = () => {
       doc.line(10, 50, 280, 50);
       doc.setFontSize(16);
       doc.text("Facebook Post Analysis Report", 10, 60);
+
+      const chartElement = document.querySelector(".chartContainer2");
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          doc.addImage(imgData, "PNG", 10, 70, 260, 120);
+
+          doc.setFontSize(14);
+          doc.text("Estimated Post Data Table", 10, 200);
+
+          const tableData = [];
+          Object.keys(postAnalysisData).forEach((teaType) => {
+            Object.entries(postAnalysisData[teaType] || {}).forEach(([year, count]) => {
+              tableData.push([teaType, year, count]);
+            });
+          });
