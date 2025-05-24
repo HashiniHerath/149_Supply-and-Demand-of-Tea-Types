@@ -390,3 +390,6 @@ async def get_item_counts_instagram(request: KeywordsRequest):
     """
     # Fetch and count items based on the provided keywords
     result = await fetch_and_count_keywords_instagram(request.keywords)
+
+    # Return the results
+    return result
