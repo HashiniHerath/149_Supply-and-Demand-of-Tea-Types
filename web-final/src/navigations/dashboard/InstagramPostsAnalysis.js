@@ -71,3 +71,71 @@ const InstagramPostAnalysisChart = () => {
       return true;
     })
     .sort();
+
+    const datasets = Object.keys(postAnalysisData).map((keyword) => {
+    const data = filteredMonths.map(
+      (month) => postAnalysisData[keyword][month] || 0
+    );
+
+    return {
+      label: keyword,
+      data,
+      borderColor:
+        keyword === "Black_Tea"
+          ? "black"
+          : keyword === "White_Tea"
+          ? "yellow"
+          : "green",
+      backgroundColor: "rgba(0, 123, 255, 0.2)",
+      fill: true,
+      tension: 0.4,
+    };
+  });
+
+  const lineChartData = {
+    labels: filteredMonths,
+    datasets: datasets,
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "#333",
+        },
+      },
+      title: {
+        display: true,
+        text: "Instagram Post Analysis by Month and Year",
+        color: "#333",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Month-Year",
+          color: "#333",
+        },
+      },
+      y: {
+        ticks: {
+          color: "#333",
+        },
+        title: {
+          display: true,
+          text: "Number of Posts",
+          color: "#333",
+        },
+        beginAtZero: true,
+      },
+    },
+  };
