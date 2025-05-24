@@ -90,3 +90,30 @@ const FacebookPostAnalysisChart = () => {
       },
     ],
   };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: { color: "#333" },
+      },
+      title: {
+        display: true,
+        text: "Facebook Post Analysis by Year for Tea Types",
+        color: "#333",
+        font: { size: 18 },
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: "#333" },
+        title: { display: true, text: "Year", color: "#333" },
+      },
+      y: {
+        ticks: { color: "#333" },
+        title: { display: true, text: "Number of Posts", color: "#333" },
+        beginAtZero: true,
+      },
+    },
+  };
