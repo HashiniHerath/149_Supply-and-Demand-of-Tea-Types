@@ -50,3 +50,11 @@ const InstagramPostAnalysisChart = () => {
       }
     };
 
+      fetchPostData();
+  }, []);
+
+  // Get current year and month
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
+
