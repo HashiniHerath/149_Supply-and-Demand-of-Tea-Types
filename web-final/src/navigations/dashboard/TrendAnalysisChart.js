@@ -148,3 +148,35 @@ const TrendAnalysisChart = () => {
     },
   };
 
+  const generatePDF = async () => {
+    const doc = new jsPDF("landscape");
+    const logo = new Image();
+    logo.src = `${process.env.PUBLIC_URL}/images/logo.png`;
+
+    logo.onload = () => {
+      // Add logo and header
+      doc.addImage(logo, "PNG", 10, 10, 50, 30);
+      doc.setFontSize(22);
+      doc.text("TeaVerse", 70, 20);
+      doc.setFontSize(10);
+      doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
+      doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
+      doc.text("Website: www.teaverse.com", 70, 44);
+      doc.setDrawColor(150);
+      doc.line(10, 50, 280, 50);
+      doc.setFontSize(16);
+      doc.text("Google Analysis Report", 10, 60);
+      //Facebook Post Analysis Report
+
+      const chartElement = document.querySelector(".chartContainer");
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          doc.addImage(imgData, "PNG", 10, 70, 260, 120);
+
+          doc.save("Google_Analysis_Report.pdf");
+        });
+      }
+    };
+  };
+
