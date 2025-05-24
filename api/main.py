@@ -192,3 +192,28 @@ def fetch_twitter_data(query: str, count: int) -> str:
     data = res.read()
 
     return data.decode("utf-8")
+
+# Helper function: Extract posts with their dates
+def extract_posts_with_dates(data_string):
+    posts_with_dates = []
+    data = json.loads(data_string)
+    instructions = data.get("result", {}).get("timeline", {}).get("instructions", [])
+
+    for instruction in instructions:
+        entries = instruction.get("entries", [])
+        for entry in entries:
+            content = entry.get("content", {})
+            if content.get("__typename") == "TimelineTimelineModule":
+                items = content.get("items", [])
+                for item in items:
+                    user_content = item.get("item", {}).get("itemContent", {}).get("user_results", {}).get("result", {}).get("legacy", {})
+                    description = user_content.get("description", "")
+                    created_at = user_content.get("created_at", "")
+
+                    if description and created_at:
+                        posts_with_dates.append({
+                            "content": description,
+                            "date": created_at
+                        })
+
+    return posts_with_dates
