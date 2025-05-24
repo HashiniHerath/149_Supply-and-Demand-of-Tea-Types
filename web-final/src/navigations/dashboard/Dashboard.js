@@ -1,154 +1,80 @@
-import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import axios from "axios";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
-import Env from "../../data/Env";
+// pages/Dashboard.js
+import React, { useEffect, useState } from 'react';
+import Footer from '../../components/footer/Footer';
+import Card from '../../components/cards/Card';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Topbar from '../../components/topbar/Topbar';
+import Env from '../../data/Env';
+import GoldRatesChart from './GoldRates.chart';
+import VolumeList from './Volumes.list';
 
-// Register necessary components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend
-);
+const Dashboard = () => {
+  const [goldDetails, setGoldDetails] = useState(null);
+  const [goldStats, setGoldStats] = useState(null);
+  const [exchangeRate, setExchangeRate] = useState(null);
 
-const FacebookPostAnalysisChart = () => {
-  const [postAnalysisData, setPostAnalysisData] = useState({});
-  const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
-    const fetchPostData = async () => {
-      setLoading(true);
-
+    const fetchGoldDetails = async () => {
       try {
-        const response = await axios.post(
-          Env.BACKEND+"/count_posts_by_year_facebook",
-          {
-            keywords: ["black_tea", "white_tea", "green_tea"],
-          }
-        );
-        console.log(response.data);  // Log the response data
-        setPostAnalysisData(response.data);
+        const response = await fetch(Env.BACKEND+'/gold-details');
+        if (!response.ok) throw new Error('Failed to fetch gold details');
+        const data = await response.json();
+        console.log(data.gold_details);
+        setGoldDetails(data.gold_details);
+        setGoldStats(data.statistics);
       } catch (error) {
-        console.error("Error fetching Facebook post data:", error);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching gold details:', error);
       }
     };
-
-    fetchPostData();
+    const getLKRtoUSD = async () => {
+      try {
+        var myHeaders = new Headers();
+        myHeaders.append("apikey", "pOrA34yTe7k1fNciqMLBchhA9wMkyDnW");
+        var requestOptions = {
+          method: 'GET',
+          redirect: 'follow',
+          headers: myHeaders
+        };
+        
+        fetch("https://api.apilayer.com/fixer/convert?to=LKR&from=USD&amount=1", requestOptions)
+          .then(response => response.json())
+          .then(result => {
+            setExchangeRate(result.result)
+          })
+          .catch(error => console.log('error', error));
+        
+      } catch (error) {
+        console.error("Error fetching exchange rate:", error);
+        return null;
+      }
+    };
+    fetchGoldDetails();
+    getLKRtoUSD();
   }, []);
 
-  const chartLabels = Array.from(
-    new Set([
-      ...Object.keys(postAnalysisData["black_tea"] || {}),
-      ...Object.keys(postAnalysisData["green_tea"] || {}),
-      ...Object.keys(postAnalysisData["white_tea"] || {}),
-    ])
-  ).sort();
+  return (
+    <div className="dashContainer">
+      <Sidebar />
+      <div className="main">
+        <Topbar />
+        {goldStats&&exchangeRate&&<div className="cardBox">
+          <Card numbers={'$'+goldStats.highest_price["GC=F"]} cardName="Highest Price" icon="https://www.svgrepo.com/show/370773/stock-up.svg" />
+          <Card numbers={'$'+goldStats.lowest_price["GC=F"].toFixed(2)} cardName="Lowest Price" icon="https://www.svgrepo.com/show/370774/stock-down.svg" />
+          <Card numbers={goldStats.average_volume["GC=F"].toFixed(2)} cardName="Average Volume" icon="https://cdn-icons-png.flaticon.com/512/2997/2997013.png" />
+          <Card numbers={'Rs.'+exchangeRate.toFixed(2)} cardName="USD to LKR" icon="https://www.pngall.com/wp-content/uploads/12/USD-PNG-HD-Image.png" />
+        </div>}
+        <div className="details">
+          {/* <h2>Gold Price Details</h2> */}
+          {goldDetails&&<GoldRatesChart goldDetails={goldDetails}/>}
+          {goldDetails&&<VolumeList goldDetails={goldDetails}/>}
+          
+        </div>
+        <Footer />
+      </div>
+    </div>
+  );
+};
 
-  const lineChartData = {
-    labels: chartLabels, // x-axis labels: Years
-    datasets: [
-      {
-        label: "Black Tea",
-        data: chartLabels.map((year) => postAnalysisData["black_tea"]?.[year] || 0),
-        borderColor: "black",
-        backgroundColor: "rgba(0, 255, 0, 0.2)",
-        fill: true,
-        tension: 0.4,
-      },
-      {
-        label: "Green Tea",
-        data: chartLabels.map((year) => postAnalysisData["green_tea"]?.[year] || 0),
-        borderColor: "green",
-        backgroundColor: "rgba(255, 255, 0, 0.2)",
-        fill: true,
-        tension: 0.4,
-      },
-      {
-        label: "White Tea",
-        data: chartLabels.map((year) => postAnalysisData["white_tea"]?.[year] || 0),
-        borderColor: "yellow",
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
-        fill: true,
-        tension: 0.4,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-        labels: { color: "#333" },
-      },
-      title: {
-        display: true,
-        text: "Facebook Post Analysis by Year for Tea Types",
-        color: "#333",
-        font: { size: 18 },
-      },
-    },
-    scales: {
-      x: {
-        ticks: { color: "#333" },
-        title: { display: true, text: "Year", color: "#333" },
-      },
-      y: {
-        ticks: { color: "#333" },
-        title: { display: true, text: "Number of Posts", color: "#333" },
-        beginAtZero: true,
-      },
-    },
-  };
-
-    const generatePDF = async () => {
-    const doc = new jsPDF("landscape");
-    const logo = new Image();
-    logo.src = `${process.env.PUBLIC_URL}/images/logo.png`;
-
-    logo.onload = () => {
-      // Add logo and header
-      doc.addImage(logo, "PNG", 10, 10, 50, 30);
-      doc.setFontSize(22);
-      doc.text("TeaVerse", 70, 20);
-      doc.setFontSize(10);
-      doc.text("123 Green Tea Road, Colombo, Sri Lanka", 70, 30);
-      doc.text("Phone: +94 77 123 4567 | Email: contact@teaverse.com", 70, 37);
-      doc.text("Website: www.teaverse.com", 70, 44);
-      doc.setDrawColor(150);
-      doc.line(10, 50, 280, 50);
-      doc.setFontSize(16);
-      doc.text("Facebook Post Analysis Report", 10, 60);
-
-      const chartElement = document.querySelector(".chartContainer2");
-      if (chartElement) {
-        html2canvas(chartElement).then((canvas) => {
-          const imgData = canvas.toDataURL("image/png");
-          doc.addImage(imgData, "PNG", 10, 70, 260, 120);
-
-          doc.setFontSize(14);
-          doc.text("Estimated Post Data Table", 10, 200);
-
-          const tableData = [];
-          Object.keys(postAnalysisData).forEach((teaType) => {
-            Object.entries(postAnalysisData[teaType] || {}).forEach(([year, count]) => {
-              tableData.push([teaType, year, count]);
-            });
-          });
+export default Dashboard;
