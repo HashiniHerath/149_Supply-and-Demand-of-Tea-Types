@@ -456,3 +456,6 @@ async def get_google_trends(request: TrendRequest):
             "dates": shared_dates
         }
     }
+
+RAPIDAPI_KEY = "6496790f8bmsha07b1cf7256f9c2p1995fbjsne7ca8be11817"
+RAPIDAPI_HOST = "google-search74.p.rapidapi.com"
