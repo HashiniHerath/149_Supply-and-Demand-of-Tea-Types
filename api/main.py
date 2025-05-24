@@ -369,3 +369,10 @@ async def fetch_and_count_keywords_instagram(keywords):
             counts = count_items_by_year_month(response_data)
 
             sorted_counts = {k: counts[k] for k in sorted(counts)}
+
+            results[keyword] = sorted_counts
+        except Exception as e:
+            
+            results[keyword] = {"error": str(e)}
+
+    return results
