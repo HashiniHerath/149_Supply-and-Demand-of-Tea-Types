@@ -413,10 +413,10 @@ async def get_google_trends(request: TrendRequest):
                 pytrends.build_payload([topic], timeframe='today 5-y', geo='', gprop='')
                 interest_over_time = pytrends.interest_over_time()
                 data[topic] = interest_over_time[topic].tolist()
-                
+                time.sleep(60)  # Increase delay
                 break
             except TooManyRequestsError:
                 print(f"Too many requests for topic: {topic}. Retrying after 5 minutes.")
-                
+                time.sleep(300)
 
     return {"trend_data": data}
