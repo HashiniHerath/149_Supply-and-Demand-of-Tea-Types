@@ -230,3 +230,22 @@ def group_posts_by_year(posts):
             print(f"Error parsing date for post: {post}, Error: {e}")
 
     return dict(year_counts)
+
+# Facebook Analyssis
+def count_posts_by_year(data):
+
+    year_count = defaultdict(int)
+
+    # Loop through each post in the response
+    for post in data.get("results", []):
+        timestamp = post.get("timestamp")
+        comments_count = post.get("comments_count", 0)
+        if timestamp:
+            # Convert timestamp to a datetime object
+            date = datetime.utcfromtimestamp(timestamp)
+            year = date.year
+            year_count[year] = year_count[year] + comments_count
+
+    # Sorting the years in ascending order and return the result
+    sorted_year_count = dict(sorted(year_count.items()))
+    return sorted_year_count
