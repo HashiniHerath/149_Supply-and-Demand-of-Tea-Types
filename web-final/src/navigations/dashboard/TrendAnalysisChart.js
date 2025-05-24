@@ -180,3 +180,141 @@ const TrendAnalysisChart = () => {
     };
   };
 
+  
+  return (
+    <div className="chart">
+      {/* <div className="cardHeader">
+        <h2 style={{ textAlign: "center" }}>Tea Types Trends</h2>
+      </div> */}
+
+      {/* Line Chart */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "20px" }}>
+        {/* Line Chart (75%) */}
+        <div className="chartContainer" style={{ flex: "3", marginBottom: "20px" }}>
+          {loading ? (
+            <img 
+            src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`} 
+            className="blog-image" 
+            style={{ 
+              width: "250px", 
+              height: "250px", 
+              objectFit: "contain", 
+              display: "block", 
+              margin: "auto" 
+            }} 
+          />
+          ) : (
+            <Line data={lineChartData} options={options} />
+          )}
+        </div>
+
+        {/* Pie Chart (25%) */}
+        <div style={{ flex: "1", textAlign: "center", marginTop: "40px" }}>
+          <h3>This Year Summary</h3>
+          <Pie data={thisYearData} />
+          {!loading && (
+            <button
+              onClick={generatePDF}
+              style={{
+                display: "block",
+                margin: "10px auto",
+                padding: '10px 20px',
+                backgroundColor: "#28a745",
+                color: "#fff",
+                fontSize: "16px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: 0.6,
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'lightgreen';
+                e.target.style.color = 'black';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'green';
+                e.target.style.color = 'white';
+              }}
+            >
+              Generate PDF
+            </button>
+          )}
+        </div>
+      </div>
+
+      
+
+      {/* Make as a Tabmenu section */}
+      <div style={{ textAlign: "center", marginTop: "50px", marginBottom: "20px", display: 'flex' }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "10px 20px",
+            margin: "10px",
+            cursor: "pointer",
+            backgroundColor: selectedType === "Facebook" ? "#007bff" : "#f0f0f0",
+            color: selectedType === "Facebook" ? "#fff" : "#333",
+            borderRadius: "25px",
+            fontWeight: "bold",
+            boxShadow: selectedType === "Facebook" ? "0px 4px 10px rgba(0, 123, 255, 0.5)" : "none",
+            transition: "all 0.3s ease",
+            padding: "12px 25px",
+            margin: "0 10px",
+          }}
+          onClick={() => handleTypeChange("Facebook")}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#007bff")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = selectedType === "Facebook" ? "#007bff" : "#f0f0f0")}
+        >
+          Facebook
+        </div>
+        <div
+          style={{
+            padding: "12px 25px",
+            margin: "0 10px",
+            cursor: "pointer",
+            backgroundColor: selectedType === "Instagram" ? "#007bff" : "#f0f0f0",
+            color: selectedType === "Instagram" ? "#fff" : "#333",
+            borderRadius: "25px",
+            fontWeight: "bold",
+            boxShadow: selectedType === "Instagram" ? "0px 4px 10px rgba(0, 123, 255, 0.5)" : "none",
+            transition: "all 0.3s ease",
+          }}
+          onClick={() => handleTypeChange("Instagram")}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#007bff")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = selectedType === "Instagram" ? "#007bff" : "#f0f0f0")}
+        >
+          Instagram
+        </div>
+        {/* <div
+          style={{
+            padding: "12px 25px",
+            margin: "0 10px",
+            cursor: "pointer",
+            backgroundColor: selectedType === "Twitter/X" ? "#007bff" : "#f0f0f0",
+            color: selectedType === "Twitter/X" ? "#fff" : "#333",
+            borderRadius: "25px",
+            fontWeight: "bold",
+            boxShadow: selectedType === "Twitter/X" ? "0px 4px 10px rgba(0, 123, 255, 0.5)" : "none",
+            transition: "all 0.3s ease",
+          }}
+          onClick={() => handleTypeChange("Twitter/X")}
+          onMouseEnter={(e) => (e.target.style.backgroundColor = "#007bff")}
+          onMouseLeave={(e) => (e.target.style.backgroundColor = selectedType === "Twitter/X" ? "#007bff" : "#f0f0f0")}
+        >
+          Twitter/X
+        </div> */}
+      </div>
+
+
+      {/* Conditional rendering based on selected type */}
+      {selectedType === "Facebook" && <FacebookPostAnalysisChart />}
+      {selectedType === "Instagram" && <InstagramPostAnalysisChart />}
+      {/* {selectedType === "Twitter/X" && <TwitterPostAnalysisChart />} */}
+    </div>
+  );
+};
+
+export default TrendAnalysisChart;
+
