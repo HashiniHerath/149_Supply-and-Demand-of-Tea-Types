@@ -134,3 +134,57 @@ const TwitterPostAnalysisChart = () => {
       });
     }
   };
+
+  
+  return (
+    <div className="chart">
+      <div className="cardHeader">
+        <h2 style={{ textAlign: "center" }}>Twitter Post Analysis</h2>
+      </div>
+      <div className="chartContainer2">
+        {loading ? (
+          <img 
+            src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`} 
+            className="blog-image" 
+            style={{ 
+              width: "250px", 
+              height: "250px", 
+              objectFit: "contain", 
+              display: "block", 
+              margin: "auto" 
+            }} 
+          />
+        ) : (
+          <Line data={lineChartData} options={options} />
+        )}
+      </div>
+      {!loading&&<button
+        onClick={generatePDF}
+        style={{
+          display: "block",
+          margin: "10px auto",
+          padding: '10px 20px',
+          backgroundColor: "#28a745",
+          color: "#fff",
+          fontSize: "16px",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          transition: 0.6,
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'lightgreen';
+          e.target.style.color = 'black';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'green';
+          e.target.style.color = 'white';
+        }}
+      >
+        Generate PDF
+      </button>}
+    </div>
+  );
+};
+
+export default TwitterPostAnalysisChart;
