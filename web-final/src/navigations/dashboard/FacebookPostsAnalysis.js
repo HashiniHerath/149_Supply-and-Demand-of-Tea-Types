@@ -166,3 +166,30 @@ const options = {
       }
     };
   };
+
+  
+  return (
+    <div className="chart">
+      <div className="cardHeader">
+        <h2 style={{ textAlign: "center" }}>Facebook Post Analysis</h2>
+      </div>
+      <div className="chartContainer2">
+        {loading ? (
+          <img
+            src={`${process.env.PUBLIC_URL}/animations/loading_screen.gif`}
+            className="blog-image"
+            style={{
+              width: "250px",
+              height: "250px",
+              objectFit: "contain",
+              display: "block",
+              margin: "auto",
+            }}
+            alt="Loading"
+          />
+        ) : (
+          <Line data={lineChartData} options={options} />
+        )}
+      </div>
+
+      
