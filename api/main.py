@@ -437,3 +437,6 @@ async def get_google_trends(request: TrendRequest):
                 # Build the payload for the topic
                 pytrends.build_payload([topic], timeframe='today 5-y', geo='', gprop='')
                 interest_over_time = pytrends.interest_over_time()
+
+                if idx == 0:
+                    shared_dates = interest_over_time.index.strftime('%Y-%m-%d').tolist()
