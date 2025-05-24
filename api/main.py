@@ -10,7 +10,7 @@ from typing import Dict, List
 
 app = FastAPI()
 
-
+#Allow all HTTP methods
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Update this with your frontend's origin for better security
