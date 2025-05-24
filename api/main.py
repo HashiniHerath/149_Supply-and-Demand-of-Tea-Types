@@ -376,3 +376,17 @@ async def fetch_and_count_keywords_instagram(keywords):
             results[keyword] = {"error": str(e)}
 
     return results
+
+@app.post("/count_items_by_year_month_instagram")
+async def get_item_counts_instagram(request: KeywordsRequest):
+    """
+    Fetches Instagram data for a list of keywords and counts items by year and month.
+
+    Args:
+        request (KeywordsRequest): A Pydantic model containing a list of keywords.
+
+    Returns:
+        dict: A dictionary with each keyword as a key and counts by year-month as values.
+    """
+    # Fetch and count items based on the provided keywords
+    result = await fetch_and_count_keywords_instagram(request.keywords)
